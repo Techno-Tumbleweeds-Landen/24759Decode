@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.Hardware.RobotHardware;
 import org.firstinspires.ftc.teamcode.Hardware.Subsystems.Drivetrain;
-import org.firstinspires.ftc.teamcode.Hardware.Subsystems.IMUSensor;
+import org.firstinspires.ftc.teamcode.Software.Subsystems.IMUSensor;
 
 @TeleOp
 public class TeleOpMain extends OpMode {
