@@ -25,8 +25,9 @@ public class TeleOpMain extends OpMode {
     @Override
     public void loop() {
         // Tests two Front Motors
-        robot.leftFront.setPower(gamepad1.right_stick_y);
-        robot.rightFront.setPower(gamepad1.left_stick_y);
+        move.drive(gamepad1.left_stick_y, gamepad1.left_stick_x,
+                gamepad1.right_stick_y, gamepad1.right_stick_x,
+                gyro.getHeading(), 0.8f);
 
         // Tests IMU on button press
         if (gamepad1.a) {
