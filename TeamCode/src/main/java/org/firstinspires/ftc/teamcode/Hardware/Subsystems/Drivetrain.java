@@ -8,13 +8,15 @@ import org.firstinspires.ftc.teamcode.Software.Subsystems.IMUSensor;
 import java.util.Vector;
 
 public class Drivetrain {
-    RobotHardware rob = new RobotHardware();
+    RobotHardware robot = new RobotHardware();
     double x;
     double y;
     double tangent;
     double normal;
 
-    public void drive(double LeftStickY, double LeftStickX, double RightStickY, double RightStickX, double heading, double motorSpeed){
+    public void drive(double motorSpeed){
+        robot.rightFront.setPower(0.5);
+        /*
         x = Math.cos(heading);
         y = Math.sin(heading);
 
@@ -25,8 +27,6 @@ public class Drivetrain {
         rob.rightBack.setPower((( - RightStickY - LeftStickX) + (normal)) * motorSpeed);
         rob.leftBack.setPower((( - RightStickY + LeftStickX) - (normal)) * motorSpeed);
         rob.leftFront.setPower((( - RightStickY + LeftStickX) + (normal)) * motorSpeed);
-
-
-
+         */
     }
 }

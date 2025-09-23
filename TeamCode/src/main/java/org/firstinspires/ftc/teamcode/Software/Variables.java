@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Software.Variables;
+package org.firstinspires.ftc.teamcode.Software;
 
 public class Variables {
     public static final double highBucket = 1550;

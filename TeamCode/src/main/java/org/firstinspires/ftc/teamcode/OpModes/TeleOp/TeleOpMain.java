@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import org.firstinspires.ftc.teamcode.Hardware.RobotHardware;
 import org.firstinspires.ftc.teamcode.Hardware.Subsystems.Drivetrain;
 import org.firstinspires.ftc.teamcode.Software.Subsystems.IMUSensor;
-import org.firstinspires.ftc.teamcode.Software.Variables.Variables;
+import org.firstinspires.ftc.teamcode.Software.Variables;
 
 @TeleOp
 public class TeleOpMain extends OpMode {
@@ -27,9 +27,11 @@ public class TeleOpMain extends OpMode {
     @Override
     public void loop() {
         // Tests two Front Motors
-        mov.drive(gamepad1.left_stick_y, gamepad1.left_stick_x,
-                gamepad1.right_stick_y, gamepad1.right_stick_x,
-                gyr.getHeading(), 0.8f);
+        // double LeftStickY, double LeftStickX, double RightStickY, double RightStickX, double heading,
+        // gamepad1.left_stick_y, gamepad1.left_stick_x,
+        //                gamepad1.right_stick_y, gamepad1.right_stick_x,
+        //                gyr.getHeading(),
+        mov.drive(0.8f);
 
         //rob.rightFront.setPower((( - gamepad1.right_stick_y - gamepad1.left_stick_x) - (gamepad1.right_stick_x)));
         //rob.rightBack.setPower((( - gamepad1.right_stick_y - gamepad1.left_stick_x) + (gamepad1.right_stick_x)));
