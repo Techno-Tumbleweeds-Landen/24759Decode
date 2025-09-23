@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.IMU;
 
 public class RobotHardware {
-    public DcMotor leftFront, rightFront, leftBack, rightBack;
+    public DcMotor leftFront, rightFront, leftBack, rightBack, testMotor;
     public IMU imu;
 
     public void init(HardwareMap hwMap) {
@@ -29,5 +29,14 @@ public class RobotHardware {
         rightFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         leftBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+        testMotor = hwMap.get(DcMotor.class, "testMotor");
+        testMotor.setDirection(DcMotor.Direction.FORWARD);
+        testMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        testMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        testMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+
+
     }
 }
