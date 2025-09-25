@@ -54,6 +54,7 @@ public class Sorter_Automation extends OpMode {
         for (int i = 0; i < sorter.getAllSlots().length; i++) {
             telemetry.addData("Slot " + i, sorter.getSlot(i));
         }
+
         telemetry.update();
     }
 }
