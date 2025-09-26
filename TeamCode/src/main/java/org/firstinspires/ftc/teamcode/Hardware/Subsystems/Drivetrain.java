@@ -13,11 +13,11 @@ public class Drivetrain {
     double rfPow, rbPow, lbPow, lfPow;
     double targetHeading = 0.0;
     double headingError;
-    boolean isStrafingOnly;
+    boolean isStrafing;
 
     final double DEADZONE = 0.05;
     final double STRAFE_SCALAR = 1.2;
-    final double HEADING_KP = 0.5;
+    final double HEADING_KP = -0.04;
 
     public void init(HardwareMap hwMap) {
         rob.init(hwMap);
@@ -42,15 +42,12 @@ public class Drivetrain {
         normal *= STRAFE_SCALAR;
 
         // 🛡️ Heading hold correction during pure strafing
-        isStrafingOnly = rotate == 0.0 && LeftStickY == 0.0 && (RightStickX != 0.0 || RightStickY != 0.0);
-
-        if (!isStrafingOnly) {
-            targetHeading = heading;
-        }
-
-        headingError = targetHeading - heading;
-        if (isStrafingOnly) {
+        if (LeftStickX == 0) {
+            headingError = targetHeading - heading;
             rotate = headingError * HEADING_KP;
+
+        } else {
+            targetHeading = heading;
         }
 
         // 🧮 Calculate motor powers

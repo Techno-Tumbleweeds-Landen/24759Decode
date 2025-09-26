@@ -3,7 +3,7 @@ package org.firstinspires.ftc.teamcode.Software.Subsystems;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.firstinspires.ftc.teamcode.Software.Sorter;
+import org.firstinspires.ftc.teamcode.OpModes.TeleOp.Sorter;
 import org.firstinspires.ftc.teamcode.Software.Sorter_Positions;
 
 @TeleOp(name="Sorter Automation", group="TeleOp")

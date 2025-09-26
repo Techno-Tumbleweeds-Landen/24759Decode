@@ -1,4 +1,6 @@
-package org.firstinspires.ftc.teamcode.Software;
+package org.firstinspires.ftc.teamcode.OpModes.TeleOp;
+
+import org.firstinspires.ftc.teamcode.Software.Sorter_Positions;
 
 public class Sorter {
     // Private array of slots
@@ -10,17 +12,11 @@ public class Sorter {
 
     // Getter for a single slot
     public Sorter_Positions getSlot(int index) {
-        if (index < 0 || index >= slots.length) {
-            throw new IndexOutOfBoundsException("Slot index out of range");
-        }
         return slots[index];
     }
 
     // Setter for a single slot
     public void setSlot(int index, Sorter_Positions color) {
-        if (index < 0 || index >= slots.length) {
-            throw new IndexOutOfBoundsException("Slot index out of range");
-        }
         slots[index] = color;
     }
 
@@ -31,9 +27,10 @@ public class Sorter {
 
     // Flip a slot between GREEN and PURPLE
     public void toggleSlot(int index) {
-        if (index < 0 || index >= slots.length) {
-            throw new IndexOutOfBoundsException("Slot index out of range");
+        if (slots[index] == Sorter_Positions.GREEN) {
+            slots[index] = Sorter_Positions.PURPLE;
+        } else {
+            slots[index] = Sorter_Positions.GREEN;
         }
-        slots[index] = (slots[index] == Sorter_Positions.GREEN) ? Sorter_Positions.PURPLE : Sorter_Positions.GREEN;
     }
 }

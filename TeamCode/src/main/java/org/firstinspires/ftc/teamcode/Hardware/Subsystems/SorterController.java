@@ -5,10 +5,10 @@ import org.firstinspires.ftc.teamcode.Hardware.RobotHardware;
 
 import org.firstinspires.ftc.teamcode.Software.Variables;
 
-public class RotateMotor {
+public class SorterController {
     RobotHardware robot;
 
-    public RotateMotor(RobotHardware robot) {
+    public SorterController(RobotHardware robot) {
         this.robot = robot;
     }
 
