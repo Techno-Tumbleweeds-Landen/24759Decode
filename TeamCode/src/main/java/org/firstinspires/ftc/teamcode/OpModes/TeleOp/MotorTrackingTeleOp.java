@@ -7,6 +7,7 @@ import org.firstinspires.ftc.teamcode.Hardware.RobotHardware;
 import org.firstinspires.ftc.teamcode.Hardware.Subsystems.Drivetrain;
 import org.firstinspires.ftc.teamcode.Software.Subsystems.IMUSensor;
 import org.firstinspires.ftc.teamcode.Hardware.Subsystems.RotateMotor;
+import org.firstinspires.ftc.teamcode.Software.Subsystems.MagneticLimitSwitch;
 
 @TeleOp
 public class MotorTrackingTeleOp extends OpMode {
@@ -15,6 +16,7 @@ public class MotorTrackingTeleOp extends OpMode {
     RobotHardware robot = new RobotHardware();
     Drivetrain move = new Drivetrain();
     RotateMotor rotate;
+    MagneticLimitSwitch limitReset;
 
     @Override
     public void init() {
@@ -24,25 +26,15 @@ public class MotorTrackingTeleOp extends OpMode {
 
         // Pass initialized robot to RotateMotor
         rotate = new RotateMotor(robot);
-    }
 
-    //boolean lastA = false;
+        // Create limit reset helper
+        limitReset = new MagneticLimitSwitch(robot.testMotor, robot.magneticSwitch);
+    }
 
     @Override
     public void loop() {
-        /*
-        if (gamepad1.a && !lastA) {   // button just pressed
-            rotate.rotateSorter(1);
-        } else if (gamepad1.b && lastA) {  // button just released
-            rotate.rotateSorter(1);
-        }else if (gamepad1.x && !lastA) {
-            rotate.rotateSorter(2);
-        } else {
-            rotate.rotateSorter(4);
-        }
-
-        //lastA = gamepad1.a;
-         */
+        // Check the magnetic limit switch each loop
+        limitReset.checkAndReset();
 
         if (gamepad1.a) {
             rotate.rotateSorter(0);
@@ -51,11 +43,12 @@ public class MotorTrackingTeleOp extends OpMode {
         } else if (gamepad1.x) {
             rotate.rotateSorter(2);
         } else {
-            rotate.rotateSorter(4 ); // stop motor
+            rotate.rotateSorter(4); // stop motor
         }
 
         telemetry.addData("Position", robot.testMotor.getCurrentPosition());
         telemetry.addData("Busy?", robot.testMotor.isBusy());
+        telemetry.addData("Limit Pressed", limitReset.isPressed());
+        telemetry.update();
     }
-
 }

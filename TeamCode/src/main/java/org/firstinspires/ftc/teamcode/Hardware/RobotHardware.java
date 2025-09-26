@@ -3,10 +3,12 @@ package org.firstinspires.ftc.teamcode.Hardware;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.IMU;
+import com.qualcomm.robotcore.hardware.DigitalChannel;
 
 public class RobotHardware {
     public DcMotor leftFront, rightFront, leftBack, rightBack, testMotor;
     public IMU imu;
+    public DigitalChannel magneticSwitch;   // Magnetic Limit Switch
 
     public void init(HardwareMap hwMap) {
         // IMU sensor
@@ -30,13 +32,15 @@ public class RobotHardware {
         leftBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
+        // Test motor
         testMotor = hwMap.get(DcMotor.class, "testMotor");
         testMotor.setDirection(DcMotor.Direction.FORWARD);
         testMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         testMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         testMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-
-
+        // Magnetic Limit Switch
+        magneticSwitch = hwMap.get(DigitalChannel.class, "testMagnetic");
+        magneticSwitch.setMode(DigitalChannel.Mode.INPUT);
     }
 }
