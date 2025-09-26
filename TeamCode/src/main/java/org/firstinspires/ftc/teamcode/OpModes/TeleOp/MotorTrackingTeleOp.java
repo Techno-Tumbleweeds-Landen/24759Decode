@@ -28,7 +28,7 @@ public class MotorTrackingTeleOp extends OpMode {
         rotate = new RotateMotor(robot);
 
         // Create limit reset helper
-        limitReset = new MagneticLimitSwitch(robot.testMotor, robot.testMagnetic);
+        limitReset = new MagneticLimitSwitch(robot.testMotor, robot.magneticSwitch);
     }
 
     @Override

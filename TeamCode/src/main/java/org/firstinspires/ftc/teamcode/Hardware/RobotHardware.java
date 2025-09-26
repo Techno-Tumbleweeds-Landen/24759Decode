@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.hardware.DigitalChannel;
 public class RobotHardware {
     public DcMotor leftFront, rightFront, leftBack, rightBack, testMotor;
     public IMU imu;
-    public DigitalChannel testMagnetic;   // Magnetic Limit Switch
+    public DigitalChannel magneticSwitch;   // Magnetic Limit Switch
 
     public void init(HardwareMap hwMap) {
         // IMU sensor
@@ -40,7 +40,7 @@ public class RobotHardware {
         testMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         // Magnetic Limit Switch
-        testMagnetic = hwMap.get(DigitalChannel.class, "testMagnetic");
-        testMagnetic.setMode(DigitalChannel.Mode.INPUT);
+        magneticSwitch = hwMap.get(DigitalChannel.class, "testMagnetic");
+        magneticSwitch.setMode(DigitalChannel.Mode.INPUT);
     }
 }
