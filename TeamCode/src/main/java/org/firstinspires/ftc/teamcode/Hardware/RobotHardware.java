@@ -40,7 +40,7 @@ public class RobotHardware {
         testMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         // Magnetic Limit Switch
-        magneticSwitch = hwMap.get(DigitalChannel.class, "testMagnetic");
+        magneticSwitch = hwMap.get(DigitalChannel.class, "magneticSwitch");
         magneticSwitch.setMode(DigitalChannel.Mode.INPUT);
     }
 }

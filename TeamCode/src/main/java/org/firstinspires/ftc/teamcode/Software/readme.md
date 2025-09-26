@@ -22,3 +22,6 @@
 |         | 1           | colorSensor    |   | 1             |           |
 |         | 2           |                |   | 2             |           |
 |         | 3           |                |   | 3             |           |
+
+
+https://www.tablesgenerator.com/markdown_tables
