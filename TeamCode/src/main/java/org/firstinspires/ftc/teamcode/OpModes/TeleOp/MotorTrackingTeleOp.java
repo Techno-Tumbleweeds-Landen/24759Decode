@@ -21,7 +21,7 @@ public class MotorTrackingTeleOp extends OpMode {
     @Override
     public void init() {
         // Init hardware
-        gyro.init(hardwareMap);
+        gyro.init(robot);
         robot.init(hardwareMap);
 
         // Pass initialized robot to RotateMotor

@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import org.firstinspires.ftc.teamcode.Hardware.RobotHardware;
 import org.firstinspires.ftc.teamcode.Hardware.Subsystems.Drivetrain;
 import org.firstinspires.ftc.teamcode.Software.Subsystems.IMUSensor;
+import org.firstinspires.ftc.teamcode.Software.Subsystems.TelemetryManager;
 import org.firstinspires.ftc.teamcode.Software.Variables;
 
 @TeleOp
@@ -14,13 +15,17 @@ public class TeleOpMain extends OpMode {
     // Creates instances of our subsystems
     IMUSensor gyr = new IMUSensor();
     Drivetrain mov = new Drivetrain();
+    TelemetryManager tel = new TelemetryManager();
+    RobotHardware rob = new RobotHardware();
     double heading;
 
     @Override
     public void init() {
         // Initializes our subsystems
-        gyr.init(hardwareMap);
-        mov.init(hardwareMap);
+        rob.init(hardwareMap);
+        gyr.init(rob);
+        mov.init(rob);
+        tel.init(telemetry);
     }
 
     @Override
