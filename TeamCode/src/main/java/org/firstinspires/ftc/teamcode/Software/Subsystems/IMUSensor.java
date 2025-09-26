@@ -23,4 +23,9 @@ public class IMUSensor {
     public double getHeading() {
         return robot.imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS);
     }
+
+    public void resetIMU() {
+        robot.imu.resetYaw();
+    }
+
 }
