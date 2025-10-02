@@ -1,10 +1,10 @@
-package org.firstinspires.ftc.teamcode.Software.Subsystems;
+package org.firstinspires.ftc.teamcode.OpModes.TeleOp;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.firstinspires.ftc.teamcode.OpModes.TeleOp.Sorter;
 import org.firstinspires.ftc.teamcode.Software.Sorter_Positions;
+import org.firstinspires.ftc.teamcode.Software.Subsystems.Sorter;
 
 @TeleOp(name="Sorter Automation", group="TeleOp")
 public class Sorter_Automation extends OpMode {
