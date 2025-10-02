@@ -15,8 +15,8 @@ public class IMUSensor {
         this.rob = passedRob;
 
         RevHubOrientationOnRobot RevOrientation = new RevHubOrientationOnRobot(
-                RevHubOrientationOnRobot.LogoFacingDirection.UP,
-                RevHubOrientationOnRobot.UsbFacingDirection.RIGHT
+                RevHubOrientationOnRobot.LogoFacingDirection.FORWARD,
+                RevHubOrientationOnRobot.UsbFacingDirection.LEFT
         );
         rob.imu.initialize(new IMU.Parameters(RevOrientation));
     }

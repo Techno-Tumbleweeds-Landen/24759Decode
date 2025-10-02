@@ -20,12 +20,10 @@ public class Drivetrain {
     final double STRAFE_SCALAR = 1.2;
     final double HEADING_KP = -0.04; // proportional gain
     final double HEADING_KI = 0.04; // integral gain
-    public void setTelemetryManager(TelemetryManager passedTel) {
-        this.tel = passedTel;
-    }
 
-    public void init(RobotHardware passedRob) {
+    public void init(RobotHardware passedRob, TelemetryManager passedTel) {
         this.rob = passedRob;
+        this.tel = passedTel;
     }
 
     public void drive(double LeftStickY, double LeftStickX,
@@ -68,5 +66,7 @@ public class Drivetrain {
         rob.rightBack.setPower(rbPow * motorSpeed);
         rob.leftBack.setPower(lbPow * motorSpeed);
         rob.leftFront.setPower(lfPow * motorSpeed);
+        tel.log("hallo", rfPow);
+        tel.update();
     }
 }

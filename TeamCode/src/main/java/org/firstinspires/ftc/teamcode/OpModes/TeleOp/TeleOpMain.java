@@ -23,9 +23,9 @@ public class TeleOpMain extends OpMode {
     public void init() {
         // Initializes our subsystems
         rob.init(hardwareMap);
-        gyr.init(rob);
-        mov.init(rob);
         tel.init(telemetry);
+        gyr.init(rob);
+        mov.init(rob, tel);
     }
 
     @Override
