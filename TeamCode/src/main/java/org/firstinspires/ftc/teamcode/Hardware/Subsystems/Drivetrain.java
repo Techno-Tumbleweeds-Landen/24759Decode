@@ -4,11 +4,12 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.firstinspires.ftc.teamcode.Software.Subsystems.Operators;
 import org.firstinspires.ftc.teamcode.Hardware.RobotHardware;
 import org.firstinspires.ftc.teamcode.Software.Subsystems.IMUSensor;
+import org.firstinspires.ftc.teamcode.Software.Subsystems.TelemetryManager;
 
 public class Drivetrain {
     Operators ope = new Operators();
-    RobotHardware rob = new RobotHardware();
-
+    private TelemetryManager tel;
+    private RobotHardware rob;
     double tangent, normal, rotate;
     double rfPow, rbPow, lbPow, lfPow;
     double targetHeading = 0.0;
@@ -17,10 +18,12 @@ public class Drivetrain {
 
     final double DEADZONE = 0.05;
     final double STRAFE_SCALAR = 1.2;
-    final double HEADING_KP = -0.04;
+    final double HEADING_KP = -0.04; // proportional gain
+    final double HEADING_KI = 0.04; // integral gain
 
-    public void init(HardwareMap hwMap) {
-        rob.init(hwMap);
+    public void init(RobotHardware passedRob, TelemetryManager passedTel) {
+        this.rob = passedRob;
+        this.tel = passedTel;
     }
 
     public void drive(double LeftStickY, double LeftStickX,
@@ -33,22 +36,18 @@ public class Drivetrain {
         RightStickY = (Math.abs(RightStickY) < DEADZONE) ? 0.0 : RightStickY;
         RightStickX = (Math.abs(RightStickX) < DEADZONE) ? 0.0 : RightStickX;
 
-        // 🧭 Field-oriented drive using provided heading
+        // 🧭 Field-oriented drive using imu heading
         tangent = Math.sin(heading) * RightStickX + Math.cos(heading) * RightStickY;
         normal = -Math.cos(heading) * RightStickX + Math.sin(heading) * RightStickY;
-        rotate = LeftStickX;
 
         // ⚙️ Boost strafing power to compensate for strafing being slow
         normal *= STRAFE_SCALAR;
 
         // 🛡️ Heading hold correction during pure strafing
-        if (LeftStickX == 0) {
-            headingError = targetHeading - heading;
-            rotate = headingError * HEADING_KP;
+        targetHeading += LeftStickX * HEADING_KI;
+        headingError = targetHeading - heading;
+        rotate = headingError * HEADING_KP;
 
-        } else {
-            targetHeading = heading;
-        }
 
         // 🧮 Calculate motor powers
         rfPow = tangent - normal + rotate;
@@ -67,5 +66,7 @@ public class Drivetrain {
         rob.rightBack.setPower(rbPow * motorSpeed);
         rob.leftBack.setPower(lbPow * motorSpeed);
         rob.leftFront.setPower(lfPow * motorSpeed);
+        tel.log("hallo", rfPow);
+        tel.update();
     }
 }
