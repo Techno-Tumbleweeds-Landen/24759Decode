@@ -8,6 +8,7 @@ import org.firstinspires.ftc.teamcode.Hardware.Subsystems.Drivetrain;
 import org.firstinspires.ftc.teamcode.Software.Subsystems.IMUSensor;
 import org.firstinspires.ftc.teamcode.Hardware.Subsystems.SorterController;
 import org.firstinspires.ftc.teamcode.Software.Subsystems.MagneticLimitSwitch;
+import org.firstinspires.ftc.teamcode.Software.Subsystems.TelemetryManager;
 
 @TeleOp
 public class MotorTrackingTeleOp extends OpMode {
@@ -15,6 +16,7 @@ public class MotorTrackingTeleOp extends OpMode {
     IMUSensor gyro = new IMUSensor();
     RobotHardware robot = new RobotHardware();
     Drivetrain move = new Drivetrain();
+    TelemetryManager tel = new TelemetryManager();
     SorterController rotate;
     MagneticLimitSwitch limitReset;
 
@@ -22,10 +24,11 @@ public class MotorTrackingTeleOp extends OpMode {
     public void init() {
         // Init hardware
         robot.init(hardwareMap);
+        tel.init(telemetry);
         gyro.init(robot);
 
         // Pass initialized robot to RotateMotor
-        rotate = new SorterController(robot);
+        rotate = new SorterController(robot, tel);
 
         // Create limit reset helper
         limitReset = new MagneticLimitSwitch(robot.testMotor, robot.magneticSwitch);
