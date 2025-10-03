@@ -5,11 +5,15 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.IMU;
 import com.qualcomm.robotcore.hardware.DigitalChannel;
+import com.qualcomm.robotcore.hardware.Servo;   // add this import
+
 
 public class RobotHardware {
     public DcMotor leftFront, rightFront, leftBack, rightBack, testMotor, rightLaunch, leftLaunch;
     public IMU imu;
     public DigitalChannel magneticSwitch;   // Magnetic Limit Switch
+    public Servo rgbLight;                  // GoBilda RGB Indicator Light
+
 
     public void init(HardwareMap hwMap) {
         // IMU sensor
@@ -57,5 +61,7 @@ public class RobotHardware {
         leftLaunch.setDirection(DcMotor.Direction.REVERSE);
         rightLaunch.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         leftLaunch.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+        rgbLight = hwMap.get(Servo.class, "light1");
     }
 }
