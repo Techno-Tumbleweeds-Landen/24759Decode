@@ -21,6 +21,7 @@ public class Lights extends OpMode {
 
     @Override
     public void loop() {
+        /*
         // A = Red
         if (gamepad1.a) {
             robot.rgbLight.setPosition(0.6);//Blue //White = (1)
@@ -37,6 +38,9 @@ public class Lights extends OpMode {
         else if (gamepad1.y) {
             robot.rgbLight.setPosition(0.5 + (abs(gamepad1.right_stick_y) / 2));
         }
+         */
+
+        robot.rgbLight.setPosition(0.5 + (gamepad1.right_stick_y) / 2);
 
         telemetry.addData("Light Pos", robot.rgbLight.getPosition());
         telemetry.update();
