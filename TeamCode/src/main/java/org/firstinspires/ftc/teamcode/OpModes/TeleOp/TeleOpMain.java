@@ -32,6 +32,7 @@ public class TeleOpMain extends OpMode {
     public void loop() {
 
         heading = gyr.getHeading();
+
         mov.drive(gamepad1.left_stick_y, gamepad1.left_stick_x,
                 gamepad1.right_stick_y, gamepad1.right_stick_x,
                 heading, 0.8f);

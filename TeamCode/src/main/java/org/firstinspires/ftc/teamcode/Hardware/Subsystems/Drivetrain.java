@@ -14,12 +14,13 @@ public class Drivetrain {
     double rfPow, rbPow, lbPow, lfPow;
     double targetHeading = 0.0;
     double headingError;
-    boolean isStrafing;
+    boolean isRotating = true;
 
+    // CONSTANTS
     final double DEADZONE = 0.05;
     final double STRAFE_SCALAR = 1.2;
-    final double HEADING_KP = -0.04; // proportional gain
-    final double HEADING_KI = 0.04; // integral gain
+    final double ROTATE_SCALAR = 1;
+    final double HEADING_CORRECTION = -0.04;
 
     public void init(RobotHardware passedRob, TelemetryManager passedTel) {
         this.rob = passedRob;
@@ -43,10 +44,19 @@ public class Drivetrain {
         // ⚙️ Boost strafing power to compensate for strafing being slow
         normal *= STRAFE_SCALAR;
 
+        // Determine if the user is trying to rotate the robot
+        isRotating = LeftStickX != 0;
+
         // 🛡️ Heading hold correction during pure strafing
-        targetHeading += LeftStickX * HEADING_KI;
-        headingError = targetHeading - heading;
-        rotate = headingError * HEADING_KP;
+        if (isRotating) {
+            tel.log("isRotating", "true");
+            targetHeading = heading;
+            rotate = LeftStickX * ROTATE_SCALAR;
+        } else {
+            tel.log("isRotating", "false");
+            headingError = targetHeading - heading;
+            rotate = headingError * HEADING_CORRECTION;
+        }
 
 
         // 🧮 Calculate motor powers
@@ -66,7 +76,7 @@ public class Drivetrain {
         rob.rightBack.setPower(rbPow * motorSpeed);
         rob.leftBack.setPower(lbPow * motorSpeed);
         rob.leftFront.setPower(lfPow * motorSpeed);
-        tel.log("hallo", rfPow);
+        tel.log("hallo", LeftStickX);
         tel.update();
     }
 }
