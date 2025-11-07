@@ -10,8 +10,8 @@ public class LauncherController {
     }
 
     public void launch(double power){
-        rob.rightLaunch.setPower(power);
-        rob.leftLaunch.setPower(power);
+        rob.launchMotor.setPower(power);
+       // rob.leftLaunch.setPower(power);
 
     }
 }

@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.hardware.Servo;   // add this import
 
 
 public class RobotHardware {
-    public DcMotor leftFront, rightFront, leftBack, rightBack, testMotor, rightLaunch, leftLaunch;
+    public DcMotor leftFront, rightFront, leftBack, rightBack, launchMotor;
     public IMU imu;
     public DigitalChannel magneticSwitch;   // Magnetic Limit Switch
     public Servo rgbLight;                  // GoBilda RGB Indicator Light
@@ -44,16 +44,17 @@ public class RobotHardware {
         rightBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         // Test motor
-        testMotor = hwMap.get(DcMotor.class, "testMotor");
-        testMotor.setDirection(DcMotor.Direction.FORWARD);
-        testMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        testMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        testMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        launchMotor = hwMap.get(DcMotor.class, "launchMotor");
+        launchMotor.setDirection(DcMotor.Direction.FORWARD);
+        launchMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        launchMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        launchMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         // Magnetic Limit Switch
         magneticSwitch = hwMap.get(DigitalChannel.class, "magneticSwitch");
         magneticSwitch.setMode(DigitalChannel.Mode.INPUT);
 
+        /*
         rightLaunch = hwMap.get(DcMotor.class, "rightLaunch");
         leftLaunch = hwMap.get(DcMotor.class, "leftLaunch");
 
@@ -61,6 +62,8 @@ public class RobotHardware {
         leftLaunch.setDirection(DcMotor.Direction.REVERSE);
         rightLaunch.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         leftLaunch.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+         */
 
         rgbLight = hwMap.get(Servo.class, "light1");
     }

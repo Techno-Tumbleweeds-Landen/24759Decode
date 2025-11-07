@@ -30,18 +30,18 @@ public class SorterController {
             position = Variables.intake3;
         } else {
             motorPower = false;
-            robot.testMotor.setPower(0);
+            robot.launchMotor.setPower(0);
         }
 
         if (motorPower) {
             // Set target ONCE
-            robot.testMotor.setTargetPosition(position);
+            robot.launchMotor.setTargetPosition(position);
             // Make sure mode is correct once at init, not every loop
-            robot.testMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            robot.launchMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             // Keep power nonzero so PID loop can hold it
-            robot.testMotor.setPower(0.25);
+            robot.launchMotor.setPower(0.25);
         }else if (!motorPower){
-            robot.testMotor.setPower(0);
+            robot.launchMotor.setPower(0);
         }
     }
 }
