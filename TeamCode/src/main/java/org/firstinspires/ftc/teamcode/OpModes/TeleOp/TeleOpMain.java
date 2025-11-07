@@ -39,6 +39,13 @@ public class TeleOpMain extends OpMode {
 
         if (gamepad1.a) {
             gyr.resetIMU();
+            mov.resetIMU();
+        }
+        if (gamepad1.x) {
+            mov.updateHeadingCorrection(-1);
+        }
+        if (gamepad1.b) {
+            mov.updateHeadingCorrection(1);
         }
 
 

@@ -19,12 +19,20 @@ public class Drivetrain {
     // CONSTANTS
     final double DEADZONE = 0.05;
     final double STRAFE_SCALAR = 1.2;
-    final double ROTATE_SCALAR = 1;
-    final double HEADING_CORRECTION = -0.04;
+    final double ROTATE_SCALAR = 0.5;
+    double HEADING_CORRECTION = 0.0005;
 
     public void init(RobotHardware passedRob, TelemetryManager passedTel) {
         this.rob = passedRob;
         this.tel = passedTel;
+    }
+
+    public void resetIMU() {
+        targetHeading = 0;
+    }
+
+    public void updateHeadingCorrection(double direction) {
+        HEADING_CORRECTION += 0.0000001 * direction;
     }
 
     public void drive(double LeftStickY, double LeftStickX,
@@ -49,11 +57,9 @@ public class Drivetrain {
 
         // 🛡️ Heading hold correction during pure strafing
         if (isRotating) {
-            tel.log("isRotating", "true");
             targetHeading = heading;
             rotate = LeftStickX * ROTATE_SCALAR;
         } else {
-            tel.log("isRotating", "false");
             headingError = targetHeading - heading;
             rotate = headingError * HEADING_CORRECTION;
         }
@@ -76,7 +82,13 @@ public class Drivetrain {
         rob.rightBack.setPower(rbPow * motorSpeed);
         rob.leftBack.setPower(lbPow * motorSpeed);
         rob.leftFront.setPower(lfPow * motorSpeed);
-        tel.log("hallo", LeftStickX);
+        tel.log("LeftStickX", LeftStickX);
+        tel.log("isRotating", isRotating);
+        tel.log("Rotate", rotate);
+        tel.log("heading", heading);
+        tel.log("targetHeading", targetHeading);
+        tel.log("HEADING_CORRECTION", HEADING_CORRECTION);
+
         tel.update();
     }
 }
