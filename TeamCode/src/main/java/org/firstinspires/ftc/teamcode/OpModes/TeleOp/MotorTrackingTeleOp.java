@@ -31,7 +31,7 @@ public class MotorTrackingTeleOp extends OpMode {
         rotate = new SorterController(robot, tel);
 
         // Create limit reset helper
-        limitReset = new MagneticLimitSwitch(robot.testMotor, robot.magneticSwitch);
+        limitReset = new MagneticLimitSwitch(robot.launchMotor, robot.magneticSwitch);
     }
 
     @Override
@@ -49,8 +49,8 @@ public class MotorTrackingTeleOp extends OpMode {
             rotate.rotateSorter(4); // stop motor
         }
 
-        telemetry.addData("Position", robot.testMotor.getCurrentPosition());
-        telemetry.addData("Busy?", robot.testMotor.isBusy());
+        telemetry.addData("Position", robot.launchMotor.getCurrentPosition());
+        telemetry.addData("Busy?", robot.launchMotor.isBusy());
         telemetry.addData("Limit Pressed", limitReset.isPressed());
         telemetry.update();
     }
