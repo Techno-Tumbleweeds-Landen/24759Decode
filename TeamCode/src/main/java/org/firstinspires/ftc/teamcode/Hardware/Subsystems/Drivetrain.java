@@ -20,7 +20,7 @@ public class Drivetrain {
     final double DEADZONE = 0.05;
     final double STRAFE_SCALAR = 1.2;
     final double ROTATE_SCALAR = 0.5;
-    double HEADING_CORRECTION = 0.0005;
+    double HEADING_CORRECTION = 0.5;
 
     public void init(RobotHardware passedRob, TelemetryManager passedTel) {
         this.rob = passedRob;
@@ -32,7 +32,7 @@ public class Drivetrain {
     }
 
     public void updateHeadingCorrection(double direction) {
-        HEADING_CORRECTION += 0.0000001 * direction;
+        HEADING_CORRECTION += 0.001 * direction;
     }
 
     public void drive(double LeftStickY, double LeftStickX,
@@ -61,7 +61,7 @@ public class Drivetrain {
             rotate = LeftStickX * ROTATE_SCALAR;
         } else {
             headingError = targetHeading - heading;
-            rotate = headingError * HEADING_CORRECTION;
+            rotate = headingError * HEADING_CORRECTION / 1000;
         }
 
 

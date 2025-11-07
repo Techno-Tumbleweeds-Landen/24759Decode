@@ -46,7 +46,6 @@ public class RobotHardware {
         // Test motor
         launchMotor = hwMap.get(DcMotor.class, "launchMotor");
         launchMotor.setDirection(DcMotor.Direction.FORWARD);
-        launchMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         launchMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         launchMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
