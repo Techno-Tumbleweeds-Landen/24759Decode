@@ -69,7 +69,7 @@ public final class TankDrive {
         public RevHubOrientationOnRobot.UsbFacingDirection usbFacingDirection =
                 RevHubOrientationOnRobot.UsbFacingDirection.FORWARD;
 
-        // drive model parameters
+        // fielddrive model parameters
         public double inPerTick = 0;
         public double trackWidthTicks = 0;
 
@@ -354,7 +354,7 @@ public final class TankDrive {
             p.put("yError", error.position.y);
             p.put("headingError (deg)", Math.toDegrees(error.heading.toDouble()));
 
-            // only draw when active; only one drive action should be active at a time
+            // only draw when active; only one fielddrive action should be active at a time
             Canvas c = p.fieldOverlay();
             drawPoseHistory(c);
 

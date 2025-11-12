@@ -39,7 +39,8 @@ public class Launcher extends OpMode {
         }
         else {
             robot.launchMotor.setPower(gamepad1.left_trigger); // stop when button not pressed
-            tel.log("speed",gamepad1.left_trigger);
+            tel.log("speed",robot.launchMotor.getPower());
+
             //robot.leftLaunch.setPower(0);
         }
     }

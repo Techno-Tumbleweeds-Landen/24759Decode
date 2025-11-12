@@ -8,7 +8,6 @@ import org.firstinspires.ftc.teamcode.Hardware.RobotHardware;
 import org.firstinspires.ftc.teamcode.Hardware.Subsystems.Drivetrain;
 import org.firstinspires.ftc.teamcode.Software.Subsystems.IMUSensor;
 import org.firstinspires.ftc.teamcode.Software.Subsystems.TelemetryManager;
-import org.firstinspires.ftc.teamcode.Software.Variables;
 
 @TeleOp
 public class TeleOpMain extends OpMode {
@@ -33,9 +32,13 @@ public class TeleOpMain extends OpMode {
 
         heading = gyr.getHeading();
 
-        mov.drive(gamepad1.left_stick_y, gamepad1.left_stick_x,
+        /*mov.fielddrive(gamepad1.left_stick_y, gamepad1.left_stick_x,
                 gamepad1.right_stick_y, gamepad1.right_stick_x,
                 heading, 0.8f);
+
+         */
+
+        mov.robotDrive(gamepad1, 0.8f);
 
         if (gamepad1.a) {
             gyr.resetIMU();

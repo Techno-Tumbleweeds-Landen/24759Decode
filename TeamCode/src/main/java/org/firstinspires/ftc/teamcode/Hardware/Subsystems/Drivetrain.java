@@ -1,9 +1,9 @@
 package org.firstinspires.ftc.teamcode.Hardware.Subsystems;
 
-import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.Gamepad;
+
 import org.firstinspires.ftc.teamcode.Software.Subsystems.Operators;
 import org.firstinspires.ftc.teamcode.Hardware.RobotHardware;
-import org.firstinspires.ftc.teamcode.Software.Subsystems.IMUSensor;
 import org.firstinspires.ftc.teamcode.Software.Subsystems.TelemetryManager;
 
 public class Drivetrain {
@@ -11,6 +11,7 @@ public class Drivetrain {
     private TelemetryManager tel;
     private RobotHardware rob;
     double tangent, normal, rotate;
+    double leftStickY, leftStickX, rightStickY, rightStickX;
     double rfPow, rbPow, lbPow, lfPow;
     double targetHeading = 0.0;
     double headingError;
@@ -34,10 +35,30 @@ public class Drivetrain {
     public void updateHeadingCorrection(double direction) {
         HEADING_CORRECTION += 0.001 * direction;
     }
+    public void robotDrive(Gamepad gamepad1, double motorSpeed) {
+        leftStickY = gamepad1.left_stick_y;
+        leftStickX = gamepad1.left_stick_x;
+        rightStickY = gamepad1.right_stick_y;
+        rightStickX = gamepad1.right_stick_x;
 
-    public void drive(double LeftStickY, double LeftStickX,
-                      double RightStickY, double RightStickX,
-                      double heading, double motorSpeed) {
+        // 🧮 Calculate motor powers
+        rfPow = tangent - normal + rotate;
+        rbPow = tangent + normal + rotate;
+        lbPow = tangent - normal - rotate;
+        lfPow = tangent + normal - rotate;
+
+        // 🧼 Clamp motor powers
+        rfPow = ope.clamp(rfPow, -1, 1);
+        rbPow = ope.clamp(rbPow, -1, 1);
+        lbPow = ope.clamp(lbPow, -1, 1);
+        lfPow = ope.clamp(lfPow, -1, 1);
+
+    }
+
+
+    public void fielddrive(double LeftStickY, double LeftStickX,
+                           double RightStickY, double RightStickX,
+                           double heading, double motorSpeed) {
 
         // 🧼 Apply deadzone to all joystick inputs
         LeftStickY = (Math.abs(LeftStickY) < DEADZONE) ? 0.0 : LeftStickY;
@@ -45,7 +66,7 @@ public class Drivetrain {
         RightStickY = (Math.abs(RightStickY) < DEADZONE) ? 0.0 : RightStickY;
         RightStickX = (Math.abs(RightStickX) < DEADZONE) ? 0.0 : RightStickX;
 
-        // 🧭 Field-oriented drive using imu heading
+        // 🧭 Field-oriented fielddrive using imu heading
         tangent = Math.sin(heading) * RightStickX + Math.cos(heading) * RightStickY;
         normal = -Math.cos(heading) * RightStickX + Math.sin(heading) * RightStickY;
 
@@ -63,6 +84,8 @@ public class Drivetrain {
             headingError = targetHeading - heading;
             rotate = headingError * HEADING_CORRECTION / 1000;
         }
+        rotate = LeftStickX * ROTATE_SCALAR;
+
 
 
         // 🧮 Calculate motor powers
