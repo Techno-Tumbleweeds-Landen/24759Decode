@@ -3,7 +3,7 @@ package org.firstinspires.ftc.teamcode.Software;
 public class Variables {
     // Sorter Positions (example values)
     public static final int intake1 = 0;
-    public static final int intake2 = -125;
+    public static final int intake2 = 466;
     public static final int intake3 = -250;
 
     // Launch Positions

@@ -56,4 +56,5 @@ public class SorterController {
             rob.launchServo.setPosition(0.3);
         }
     }
+
 }

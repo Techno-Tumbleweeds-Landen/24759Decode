@@ -31,9 +31,9 @@ public class RobotHardware {
         launchServo.setPosition(0.3);
         // Drivetrain Motor Directions
         leftFront.setDirection(DcMotor.Direction.FORWARD);
-        rightFront.setDirection(DcMotor.Direction.FORWARD);
+        rightFront.setDirection(DcMotor.Direction.REVERSE);
         leftBack.setDirection(DcMotor.Direction.FORWARD);
-        rightBack.setDirection(DcMotor.Direction.FORWARD);
+        rightBack.setDirection(DcMotor.Direction.REVERSE);
 
         // Encoder Settings
         leftFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -48,9 +48,10 @@ public class RobotHardware {
         rightBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         // Test motor
-        launchMotor.setDirection(DcMotor.Direction.FORWARD);
+        launchMotor.setDirection(DcMotor.Direction.REVERSE);
         launchMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
+        sorterMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         // NON-ACTUATOR COMPONENTS
         magneticSwitch = hwMap.get(DigitalChannel.class, "magneticSwitch");
