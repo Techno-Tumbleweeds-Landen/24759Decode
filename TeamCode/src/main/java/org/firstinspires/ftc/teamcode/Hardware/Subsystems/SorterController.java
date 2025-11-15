@@ -11,10 +11,13 @@ import org.firstinspires.ftc.teamcode.Software.Variables;
 public class SorterController {
     RobotHardware rob;
     TelemetryManager tel;
+    double distToPos, armPos;
 
     public void init(RobotHardware passedRob, TelemetryManager passedTel) {
         this.rob = passedRob;
         this.tel = passedTel;
+        this.armPos = rob.sorterMotor.getCurrentPosition();
+        this.distToPos = 0;
     }
     public void setPower(double power) {
         rob.sorterMotor.setPower(power);
@@ -47,6 +50,21 @@ public class SorterController {
         }else {
             rob.sorterMotor.setPower(0);
         }
+    }
+
+    public void PIDSorter(Gamepad gamepad) {
+        if (gamepad.y) {
+            this.armPos += 1;
+        } else if (gamepad.a) {
+            this.armPos -= 1;
+        }
+        this.distToPos = this.armPos - rob.sorterMotor.getCurrentPosition();
+        rob.sorterMotor.setPower(distToPos * -0.5);
+        tel.log("Sorter Motor Power: ", this.distToPos * -0.05);
+        tel.log("distToPos: ", this.distToPos);
+        tel.log("armPos", armPos);
+        tel.log("position", rob.sorterMotor.getCurrentPosition());
+
     }
 
     public void setPos(Gamepad gamepad) {

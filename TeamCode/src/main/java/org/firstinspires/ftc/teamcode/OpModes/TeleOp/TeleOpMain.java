@@ -29,6 +29,9 @@ public class TeleOpMain extends OpMode {
     Sorter_Automation cycler = new Sorter_Automation();
     double heading;
     boolean fieldMovement = false;
+    boolean manualSorter = true;
+    boolean launcherActive = false;
+    boolean intakeActive = false;
 
     public DcMotor sorterMotor;
 
@@ -41,7 +44,7 @@ public class TeleOpMain extends OpMode {
         intake.init(rob);
         sorter.init(rob, tel);
         launcher.init(rob, tel);
-        cycler.init(rob);          // now valid
+        cycler.init(rob, tel);          // now valid
         sorterMotor = rob.sorterMotor;
     }
 
@@ -49,10 +52,41 @@ public class TeleOpMain extends OpMode {
     public void loop() {
 
         heading = gyro.getHeading();
+        if (gamepad2.leftBumperWasPressed()) {
+            manualSorter = !manualSorter;
+        }
+        if (gamepad2.rightBumperWasPressed() || gamepad1.rightBumperWasPressed()) {
+            launcherActive = !launcherActive;
+        }
+
+        if (gamepad2.startWasPressed()) {
+            intakeActive = !intakeActive;
+        }
+
+        if (launcherActive) {
+            launcher.setPower(1);
+        } else {
+            launcher.setPower(0);
+        }
+/*
+        if (intakeActive) {
+            rob.intakeMotor.setPower(0.75);
+        } else {
+            rob.intakeMotor.setPower(0);
+        }
+
+ */
+
+        if (manualSorter) {
+            sorter.setPower(gamepad2.left_stick_x / 2);
+        } else {
+            //sorter.PIDSorter(gamepad2);
+            cycler.update(gamepad2);
+        }
 
         if (gamepad1.leftBumperWasPressed()) {
             fieldMovement = !fieldMovement;
-        }
+        } // toggle field movement
 
         if (fieldMovement) {
             drivetrain.fielddrive(gamepad1, heading, 0.8f);
@@ -65,13 +99,18 @@ public class TeleOpMain extends OpMode {
             drivetrain.resetIMU();
         }
 
-        intake.setPower(gamepad2.right_trigger - gamepad2.left_trigger);
+        if (intakeActive){
+            rob.intakeMotor.setPower(0.95);
+        } else {
+            intake.setPower(gamepad2.right_trigger - gamepad2.left_trigger);
+        }
+
         //sorter.setPower(gamepad2.left_stick_x);
-        launcher.setPower(gamepad2.right_stick_x);
-        //sorter.setPos(gamepad2);
-        cycler.update(gamepad2);
+        sorter.setPos(gamepad2);
 
         telemetry.addData("Sorter Position", sorterMotor.getCurrentPosition());
+        telemetry.addData("", "");
+        telemetry.addData("IMU Position", heading * 180);
         telemetry.update();
     }
 }

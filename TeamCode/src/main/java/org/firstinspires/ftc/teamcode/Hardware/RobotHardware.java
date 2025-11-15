@@ -52,6 +52,10 @@ public class RobotHardware {
         launchMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         sorterMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        sorterMotor.setDirection(DcMotor.Direction.REVERSE);
+        sorterMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+
 
         // NON-ACTUATOR COMPONENTS
         magneticSwitch = hwMap.get(DigitalChannel.class, "magneticSwitch");
