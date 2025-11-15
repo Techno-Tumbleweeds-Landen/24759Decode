@@ -29,8 +29,11 @@ public class TeleOpMain extends OpMode {
     Sorter_Automation cycler = new Sorter_Automation();
     double heading;
     boolean fieldMovement = false;
+<<<<<<< HEAD
     boolean manualSorter = true;
     boolean launcherActive = false;
+=======
+>>>>>>> 22ea1c84155d2fccaa0754e440a18d50cfb4e825
     boolean intakeActive = false;
 
     public DcMotor sorterMotor;
@@ -88,6 +91,7 @@ public class TeleOpMain extends OpMode {
             fieldMovement = !fieldMovement;
         } // toggle field movement
 
+
         if (fieldMovement) {
             drivetrain.fielddrive(gamepad1, heading, 0.8f);
         } else {
@@ -99,12 +103,26 @@ public class TeleOpMain extends OpMode {
             drivetrain.resetIMU();
         }
 
+<<<<<<< HEAD
         if (intakeActive){
             rob.intakeMotor.setPower(0.95);
         } else {
             intake.setPower(gamepad2.right_trigger - gamepad2.left_trigger);
         }
 
+=======
+        if (gamepad1.rightBumperWasPressed()) {
+            intakeActive = !intakeActive;
+        }
+
+        if (intakeActive) {
+            rob.intakeMotor.setPower(0.75);
+        }else{
+            rob.intakeMotor.setPower(0);
+        }
+
+        intake.setPower(gamepad2.right_trigger - gamepad2.left_trigger);
+>>>>>>> 22ea1c84155d2fccaa0754e440a18d50cfb4e825
         //sorter.setPower(gamepad2.left_stick_x);
         sorter.setPos(gamepad2);
 
