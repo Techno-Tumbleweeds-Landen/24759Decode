@@ -24,7 +24,6 @@ public class Sorter_Automation {
         pos = rob.sorterMotor.getCurrentPosition();
     }
 
-    // Call every loop
     public void update(Gamepad gamepad) {
 
         if (gamepad.x && !xWasPressed) {
@@ -41,7 +40,7 @@ public class Sorter_Automation {
         if (rob.sorterMotor.getMode() == DcMotor.RunMode.RUN_TO_POSITION && !rob.sorterMotor.isBusy()) {
             rob.sorterMotor.setPower(0);
             rob.sorterMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            pos = rob.sorterMotor.getCurrentPosition();
+            //pos = rob.sorterMotor.getCurrentPosition();
         }
 
         xWasPressed = gamepad.x;
@@ -49,8 +48,8 @@ public class Sorter_Automation {
     }
 
     private void moveToPosition(int target) {
-        rob.sorterMotor.setTargetPosition(target);
         rob.sorterMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        rob.sorterMotor.setTargetPosition(target);
         rob.sorterMotor.setPower(MOVE_POWER); // always positive
     }
 

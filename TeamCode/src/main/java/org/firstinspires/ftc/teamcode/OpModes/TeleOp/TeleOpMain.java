@@ -29,6 +29,7 @@ public class TeleOpMain extends OpMode {
     Sorter_Automation cycler = new Sorter_Automation();
     double heading;
     boolean fieldMovement = false;
+    boolean intakeActive = false;
 
     public DcMotor sorterMotor;
 
@@ -54,6 +55,7 @@ public class TeleOpMain extends OpMode {
             fieldMovement = !fieldMovement;
         }
 
+
         if (fieldMovement) {
             drivetrain.fielddrive(gamepad1, heading, 0.8f);
         } else {
@@ -63,6 +65,16 @@ public class TeleOpMain extends OpMode {
         if (gamepad1.a) {
             gyro.resetIMU();
             drivetrain.resetIMU();
+        }
+
+        if (gamepad1.rightBumperWasPressed()) {
+            intakeActive = !intakeActive;
+        }
+
+        if (intakeActive) {
+            rob.intakeMotor.setPower(0.75);
+        }else{
+            rob.intakeMotor.setPower(0);
         }
 
         intake.setPower(gamepad2.right_trigger - gamepad2.left_trigger);
