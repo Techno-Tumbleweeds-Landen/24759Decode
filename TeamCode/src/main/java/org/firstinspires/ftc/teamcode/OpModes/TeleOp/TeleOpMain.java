@@ -1,56 +1,134 @@
 package org.firstinspires.ftc.teamcode.OpModes.TeleOp;
 
-
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.Hardware.RobotHardware;
 import org.firstinspires.ftc.teamcode.Hardware.Subsystems.Drivetrain;
+import org.firstinspires.ftc.teamcode.Hardware.Subsystems.IntakeController;
+import org.firstinspires.ftc.teamcode.Hardware.Subsystems.LauncherController;
+import org.firstinspires.ftc.teamcode.Hardware.Subsystems.SorterController;
+import org.firstinspires.ftc.teamcode.Software.Subsystems.Sorter_Automation;
 import org.firstinspires.ftc.teamcode.Software.Subsystems.IMUSensor;
 import org.firstinspires.ftc.teamcode.Software.Subsystems.TelemetryManager;
 
+import com.qualcomm.robotcore.hardware.DcMotor;
+
 @TeleOp
 public class TeleOpMain extends OpMode {
-    // Creates instances of our subsystems
-    IMUSensor gyr = new IMUSensor();
-    Drivetrain mov = new Drivetrain();
+
+    IMUSensor gyro = new IMUSensor();
+    Drivetrain drivetrain = new Drivetrain();
     TelemetryManager tel = new TelemetryManager();
-    RobotHardware rob = new RobotHardware();
+
+    RobotHardware rob = new RobotHardware();   // only once
+
+    IntakeController intake = new IntakeController();
+    SorterController sorter = new SorterController();
+    LauncherController launcher = new LauncherController();
+    Sorter_Automation cycler = new Sorter_Automation();
     double heading;
+    boolean fieldMovement = false;
+<<<<<<< HEAD
+    boolean manualSorter = true;
+    boolean launcherActive = false;
+=======
+>>>>>>> 22ea1c84155d2fccaa0754e440a18d50cfb4e825
+    boolean intakeActive = false;
+
+    public DcMotor sorterMotor;
 
     @Override
     public void init() {
-        // Initializes our subsystems
         rob.init(hardwareMap);
         tel.init(telemetry);
-        gyr.init(rob);
-        mov.init(rob, tel);
+        gyro.init(rob);
+        drivetrain.init(rob, tel);
+        intake.init(rob);
+        sorter.init(rob, tel);
+        launcher.init(rob, tel);
+        cycler.init(rob, tel);          // now valid
+        sorterMotor = rob.sorterMotor;
     }
 
     @Override
     public void loop() {
 
-        heading = gyr.getHeading();
+        heading = gyro.getHeading();
+        if (gamepad2.leftBumperWasPressed()) {
+            manualSorter = !manualSorter;
+        }
+        if (gamepad2.rightBumperWasPressed() || gamepad1.rightBumperWasPressed()) {
+            launcherActive = !launcherActive;
+        }
 
-        /*mov.fielddrive(gamepad1.left_stick_y, gamepad1.left_stick_x,
-                gamepad1.right_stick_y, gamepad1.right_stick_x,
-                heading, 0.8f);
+        if (gamepad2.startWasPressed()) {
+            intakeActive = !intakeActive;
+        }
 
-         */
+        if (launcherActive) {
+            launcher.setPower(1);
+        } else {
+            launcher.setPower(0);
+        }
+/*
+        if (intakeActive) {
+            rob.intakeMotor.setPower(0.75);
+        } else {
+            rob.intakeMotor.setPower(0);
+        }
 
-        mov.robotDrive(gamepad1, 0.8f);
+ */
+
+        if (manualSorter) {
+            sorter.setPower(gamepad2.left_stick_x / 2);
+        } else {
+            //sorter.PIDSorter(gamepad2);
+            cycler.update(gamepad2);
+        }
+
+        if (gamepad1.leftBumperWasPressed()) {
+            fieldMovement = !fieldMovement;
+        } // toggle field movement
+
+
+        if (fieldMovement) {
+            drivetrain.fielddrive(gamepad1, heading, 0.8f);
+        } else {
+            drivetrain.robotDrive(gamepad1, 0.8f);
+        }
 
         if (gamepad1.a) {
-            gyr.resetIMU();
-            mov.resetIMU();
-        }
-        if (gamepad1.x) {
-            mov.updateHeadingCorrection(-1);
-        }
-        if (gamepad1.b) {
-            mov.updateHeadingCorrection(1);
+            gyro.resetIMU();
+            drivetrain.resetIMU();
         }
 
+<<<<<<< HEAD
+        if (intakeActive){
+            rob.intakeMotor.setPower(0.95);
+        } else {
+            intake.setPower(gamepad2.right_trigger - gamepad2.left_trigger);
+        }
 
+=======
+        if (gamepad1.rightBumperWasPressed()) {
+            intakeActive = !intakeActive;
+        }
+
+        if (intakeActive) {
+            rob.intakeMotor.setPower(0.75);
+        }else{
+            rob.intakeMotor.setPower(0);
+        }
+
+        intake.setPower(gamepad2.right_trigger - gamepad2.left_trigger);
+>>>>>>> 22ea1c84155d2fccaa0754e440a18d50cfb4e825
+        //sorter.setPower(gamepad2.left_stick_x);
+        sorter.setPos(gamepad2);
+
+        telemetry.addData("Sorter Position", sorterMotor.getCurrentPosition());
+        telemetry.addData("", "");
+        telemetry.addData("IMU Position", heading * 180);
+        telemetry.update();
     }
 }

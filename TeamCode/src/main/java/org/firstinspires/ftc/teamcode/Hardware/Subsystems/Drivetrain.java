@@ -41,50 +41,65 @@ public class Drivetrain {
         rightStickY = gamepad1.right_stick_y;
         rightStickX = gamepad1.right_stick_x;
 
+        tangent = rightStickY;
+        normal = rightStickX * STRAFE_SCALAR;
+        rotate = leftStickX;
+
         // 🧮 Calculate motor powers
         rfPow = tangent - normal + rotate;
         rbPow = tangent + normal + rotate;
         lbPow = tangent - normal - rotate;
         lfPow = tangent + normal - rotate;
 
+        tel.log("rfPow PRE CLAMP", rfPow);
         // 🧼 Clamp motor powers
         rfPow = ope.clamp(rfPow, -1, 1);
         rbPow = ope.clamp(rbPow, -1, 1);
         lbPow = ope.clamp(lbPow, -1, 1);
         lfPow = ope.clamp(lfPow, -1, 1);
 
+        rob.rightFront.setPower(rfPow * motorSpeed);
+        rob.rightBack.setPower(rbPow * motorSpeed);
+        rob.leftBack.setPower(lbPow * motorSpeed);
+        rob.leftFront.setPower(lfPow * motorSpeed);
+        
+
     }
 
 
-    public void fielddrive(double LeftStickY, double LeftStickX,
-                           double RightStickY, double RightStickX,
+    public void fielddrive(Gamepad gamepad1,
                            double heading, double motorSpeed) {
 
+        leftStickY = gamepad1.left_stick_y;
+        leftStickX = gamepad1.left_stick_x;
+        rightStickY = gamepad1.right_stick_y;
+        rightStickX = gamepad1.right_stick_x;        
+
         // 🧼 Apply deadzone to all joystick inputs
-        LeftStickY = (Math.abs(LeftStickY) < DEADZONE) ? 0.0 : LeftStickY;
-        LeftStickX = (Math.abs(LeftStickX) < DEADZONE) ? 0.0 : LeftStickX;
-        RightStickY = (Math.abs(RightStickY) < DEADZONE) ? 0.0 : RightStickY;
-        RightStickX = (Math.abs(RightStickX) < DEADZONE) ? 0.0 : RightStickX;
+        leftStickY = (Math.abs(leftStickY) < DEADZONE) ? 0.0 : leftStickY;
+        leftStickX = (Math.abs(leftStickX) < DEADZONE) ? 0.0 : leftStickX;
+        rightStickY = (Math.abs(rightStickY) < DEADZONE) ? 0.0 : rightStickY;
+        rightStickX = (Math.abs(rightStickX) < DEADZONE) ? 0.0 : rightStickX;
 
         // 🧭 Field-oriented fielddrive using imu heading
-        tangent = Math.sin(heading) * RightStickX + Math.cos(heading) * RightStickY;
-        normal = -Math.cos(heading) * RightStickX + Math.sin(heading) * RightStickY;
+        tangent = Math.sin(heading) * rightStickX + Math.cos(heading) * rightStickY;
+        normal = -Math.cos(heading) * rightStickX + Math.sin(heading) * rightStickY;
 
         // ⚙️ Boost strafing power to compensate for strafing being slow
         normal *= STRAFE_SCALAR;
 
         // Determine if the user is trying to rotate the robot
-        isRotating = LeftStickX != 0;
+        isRotating = leftStickX != 0;
 
         // 🛡️ Heading hold correction during pure strafing
         if (isRotating) {
             targetHeading = heading;
-            rotate = LeftStickX * ROTATE_SCALAR;
+            rotate = leftStickX * ROTATE_SCALAR;
         } else {
             headingError = targetHeading - heading;
             rotate = headingError * HEADING_CORRECTION / 1000;
         }
-        rotate = LeftStickX * ROTATE_SCALAR;
+        rotate = leftStickX * ROTATE_SCALAR;
 
 
 
@@ -105,7 +120,7 @@ public class Drivetrain {
         rob.rightBack.setPower(rbPow * motorSpeed);
         rob.leftBack.setPower(lbPow * motorSpeed);
         rob.leftFront.setPower(lfPow * motorSpeed);
-        tel.log("LeftStickX", LeftStickX);
+        tel.log("leftStickX", leftStickX);
         tel.log("isRotating", isRotating);
         tel.log("Rotate", rotate);
         tel.log("heading", heading);

@@ -9,27 +9,31 @@ import com.qualcomm.robotcore.hardware.Servo;   // add this import
 
 
 public class RobotHardware {
-    public DcMotor leftFront, rightFront, leftBack, rightBack, launchMotor;
+    public DcMotor leftFront, rightFront, leftBack, rightBack;
+    public DcMotor launchMotor, intakeMotor, sorterMotor;
     public IMU imu;
     public DigitalChannel magneticSwitch;   // Magnetic Limit Switch
-    public Servo rgbLight;                  // GoBilda RGB Indicator Light
+    public Servo rgbLight, launchServo;                  // GoBilda RGB Indicator Light
 
 
     public void init(HardwareMap hwMap) {
-        // IMU sensor
-        imu = hwMap.get(IMU.class, "imu");
-
-        // Motor Names and Variables
+        // Motor Names and Variables (drivetrain)
         leftFront = hwMap.get(DcMotor.class, "leftFront");
         rightFront = hwMap.get(DcMotor.class, "rightFront");
         leftBack = hwMap.get(DcMotor.class, "leftBack");
         rightBack = hwMap.get(DcMotor.class, "rightBack");
-
-        // Motor Directions
+        // Motor Names and Variables (other)
+        launchMotor = hwMap.get(DcMotor.class, "launchMotor");
+        intakeMotor = hwMap.get(DcMotor.class, "intakeMotor");
+        sorterMotor = hwMap.get(DcMotor.class, "sorterMotor");
+        // Servo Names and Variables
+        launchServo = hwMap.get(Servo.class, "launchServo");
+        launchServo.setPosition(0.3);
+        // Drivetrain Motor Directions
         leftFront.setDirection(DcMotor.Direction.FORWARD);
-        rightFront.setDirection(DcMotor.Direction.FORWARD);
+        rightFront.setDirection(DcMotor.Direction.REVERSE);
         leftBack.setDirection(DcMotor.Direction.FORWARD);
-        rightBack.setDirection(DcMotor.Direction.FORWARD);
+        rightBack.setDirection(DcMotor.Direction.REVERSE);
 
         // Encoder Settings
         leftFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -44,24 +48,20 @@ public class RobotHardware {
         rightBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         // Test motor
-        launchMotor = hwMap.get(DcMotor.class, "launchMotor");
-        launchMotor.setDirection(DcMotor.Direction.FORWARD);
+        launchMotor.setDirection(DcMotor.Direction.REVERSE);
         launchMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-        // Magnetic Limit Switch
+        sorterMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        sorterMotor.setDirection(DcMotor.Direction.REVERSE);
+        sorterMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+
+
+        // NON-ACTUATOR COMPONENTS
         magneticSwitch = hwMap.get(DigitalChannel.class, "magneticSwitch");
         magneticSwitch.setMode(DigitalChannel.Mode.INPUT);
-
-        /*
-        rightLaunch = hwMap.get(DcMotor.class, "rightLaunch");
-        leftLaunch = hwMap.get(DcMotor.class, "leftLaunch");
-
-        rightLaunch.setDirection(DcMotor.Direction.FORWARD);
-        leftLaunch.setDirection(DcMotor.Direction.REVERSE);
-        rightLaunch.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        leftLaunch.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-
-         */
+        // IMU sensor
+        imu = hwMap.get(IMU.class, "imu");
 
         rgbLight = hwMap.get(Servo.class, "light1");
     }

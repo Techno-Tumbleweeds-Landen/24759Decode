@@ -28,7 +28,8 @@ public class MotorTrackingTeleOp extends OpMode {
         gyro.init(robot);
 
         // Pass initialized robot to RotateMotor
-        rotate = new SorterController(robot, tel);
+        rotate = new SorterController();
+        rotate.init(robot,tel);
 
         // Create limit reset helper
         limitReset = new MagneticLimitSwitch(robot.launchMotor, robot.magneticSwitch);
