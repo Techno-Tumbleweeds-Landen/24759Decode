@@ -64,9 +64,9 @@ public class TeleOpMain extends OpMode {
         }
 
         if (launcherActive) {
-            launcher.setPower(1);
+            launcher.setPower(0.90);
         } else {
-            launcher.setPower(0);
+            launcher.setPower(gamepad2.right_stick_y);
         }
 /*
         if (intakeActive) {

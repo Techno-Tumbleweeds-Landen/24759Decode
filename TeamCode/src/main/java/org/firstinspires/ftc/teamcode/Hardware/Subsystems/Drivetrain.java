@@ -19,7 +19,7 @@ public class Drivetrain {
 
     // CONSTANTS
     final double DEADZONE = 0.05;
-    final double STRAFE_SCALAR = 1.2;
+    final double STRAFE_SCALAR = -1.2;
     final double ROTATE_SCALAR = 0.5;
     double HEADING_CORRECTION = 0.5;
 
