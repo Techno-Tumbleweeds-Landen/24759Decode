@@ -16,6 +16,7 @@ public class Drivetrain {
     double targetHeading = 0.0;
     double headingError;
     boolean isRotating = true;
+    boolean fieldMovement;
 
     // CONSTANTS
     final double DEADZONE = 0.05;
@@ -23,18 +24,28 @@ public class Drivetrain {
     final double ROTATE_SCALAR = 0.5;
     double HEADING_CORRECTION = 0.5;
 
+
     public void init(RobotHardware passedRob, TelemetryManager passedTel) {
         this.rob = passedRob;
         this.tel = passedTel;
     }
-
+    public void driveRobot(Gamepad gamepad, double motorSpeed, double heading) {
+        if (fieldMovement) {
+            fieldDrive(gamepad, heading, motorSpeed);
+        } else {
+            robotDrive(gamepad, motorSpeed);
+        }
+    }
     public void resetIMU() {
         targetHeading = 0;
     }
 
-    public void updateHeadingCorrection(double direction) {
-        HEADING_CORRECTION += 0.001 * direction;
+    public void changeMovement(Boolean wasBumperPressed) {
+        if (wasBumperPressed) {
+            fieldMovement = !fieldMovement;
+        }
     }
+
     public void robotDrive(Gamepad gamepad1, double motorSpeed) {
         leftStickY = gamepad1.left_stick_y;
         leftStickX = gamepad1.left_stick_x;
@@ -67,7 +78,7 @@ public class Drivetrain {
     }
 
 
-    public void fielddrive(Gamepad gamepad1,
+    public void fieldDrive(Gamepad gamepad1,
                            double heading, double motorSpeed) {
 
         leftStickY = gamepad1.left_stick_y;
