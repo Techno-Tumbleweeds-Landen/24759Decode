@@ -10,10 +10,10 @@ import com.qualcomm.robotcore.hardware.Servo;   // add this import
 
 public class RobotHardware {
     public DcMotor leftFront, rightFront, leftBack, rightBack;
-    public DcMotor launchMotor, intakeMotor, sorterMotor;
+    public DcMotor launchMotor, intakeMotor, launchRotateMotor;
     public IMU imu;
     public DigitalChannel magneticSwitch;   // Magnetic Limit Switch
-    public Servo rgbLight, launchServo;                  // GoBilda RGB Indicator Light
+    public Servo rgbLight, leftLaunchServo, rightLaunchServo, middleLaunchServoLeft, middleLaunchServoRight;
 
 
     public void init(HardwareMap hwMap) {
@@ -25,10 +25,12 @@ public class RobotHardware {
         // Motor Names and Variables (other)
         launchMotor = hwMap.get(DcMotor.class, "launchMotor");
         intakeMotor = hwMap.get(DcMotor.class, "intakeMotor");
-        sorterMotor = hwMap.get(DcMotor.class, "sorterMotor");
+        launchRotateMotor = hwMap.get(DcMotor.class, "launchRotator");
         // Servo Names and Variables
-        launchServo = hwMap.get(Servo.class, "launchServo");
-        launchServo.setPosition(0.3);
+        leftLaunchServo = hwMap.get(Servo.class, "leftLaunch"); // port 0
+        rightLaunchServo = hwMap.get(Servo.class, "rightLaunch"); // port 1
+        middleLaunchServoLeft = hwMap.get(Servo.class, "middleLeftLaunch"); // port 2
+        middleLaunchServoRight = hwMap.get(Servo.class, "middleRightLaunch"); // port 3
         // Drivetrain Motor Directions
         leftFront.setDirection(DcMotor.Direction.FORWARD);
         rightFront.setDirection(DcMotor.Direction.REVERSE);
@@ -51,9 +53,9 @@ public class RobotHardware {
         launchMotor.setDirection(DcMotor.Direction.REVERSE);
         launchMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-        sorterMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        sorterMotor.setDirection(DcMotor.Direction.REVERSE);
-        sorterMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        launchRotateMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        launchRotateMotor.setDirection(DcMotor.Direction.REVERSE);
+        launchRotateMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
 
 

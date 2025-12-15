@@ -20,9 +20,7 @@ public class TeleOpMain extends OpMode {
     IMUSensor gyro = new IMUSensor();
     Drivetrain drivetrain = new Drivetrain();
     TelemetryManager tel = new TelemetryManager();
-
     RobotHardware rob = new RobotHardware();   // only once
-
     IntakeController intake = new IntakeController();
     SorterController sorter = new SorterController();
     LauncherController launcher = new LauncherController();
@@ -47,7 +45,6 @@ public class TeleOpMain extends OpMode {
         sorter.init(rob, tel);
         launcher.init(rob, tel);
         cycler.init(rob, tel);          // now valid
-        sorterMotor = rob.sorterMotor;
     }
 
     @Override
@@ -86,13 +83,11 @@ public class TeleOpMain extends OpMode {
             cycler.update(gamepad2);
         }
 
-        drivetrain.changeMovement(gamepad1.leftBumperWasPressed()); // 
+        // CONTROLS DRIVETRAIN
+        drivetrain.changeMovement(gamepad1.leftBumperWasPressed());
         drivetrain.driveRobot(gamepad1, motorSpeed, heading);
+        drivetrain.resetIMU(gamepad1.a, gyro);
 
-        if (gamepad1.a) {
-            gyro.resetIMU();
-            drivetrain.resetIMU();
-        }
 
         if (intakeActive){
             rob.intakeMotor.setPower(0.95);

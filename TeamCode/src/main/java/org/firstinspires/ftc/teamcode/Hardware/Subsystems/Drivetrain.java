@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.Hardware.Subsystems;
 
 import com.qualcomm.robotcore.hardware.Gamepad;
 
+import org.firstinspires.ftc.teamcode.Software.Subsystems.IMUSensor;
 import org.firstinspires.ftc.teamcode.Software.Subsystems.Operators;
 import org.firstinspires.ftc.teamcode.Hardware.RobotHardware;
 import org.firstinspires.ftc.teamcode.Software.Subsystems.TelemetryManager;
@@ -36,8 +37,11 @@ public class Drivetrain {
             robotDrive(gamepad, motorSpeed);
         }
     }
-    public void resetIMU() {
-        targetHeading = 0;
+    public void resetIMU(Boolean reset, IMUSensor gyro) {
+        if (reset) {
+            gyro.resetIMU();
+            targetHeading = 0;
+        }
     }
 
     public void changeMovement(Boolean wasBumperPressed) {
