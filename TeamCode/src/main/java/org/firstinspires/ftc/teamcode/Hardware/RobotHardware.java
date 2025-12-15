@@ -32,10 +32,10 @@ public class RobotHardware {
         middleLaunchServoLeft = hwMap.get(Servo.class, "middleLeftLaunch"); // port 2
         middleLaunchServoRight = hwMap.get(Servo.class, "middleRightLaunch"); // port 3
         // Drivetrain Motor Directions
-        leftFront.setDirection(DcMotor.Direction.FORWARD);
-        rightFront.setDirection(DcMotor.Direction.REVERSE);
+        leftFront.setDirection(DcMotor.Direction.REVERSE);
+        rightFront.setDirection(DcMotor.Direction.FORWARD);
         leftBack.setDirection(DcMotor.Direction.FORWARD);
-        rightBack.setDirection(DcMotor.Direction.REVERSE);
+        rightBack.setDirection(DcMotor.Direction.FORWARD);
 
         // Encoder Settings
         leftFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);

@@ -17,7 +17,7 @@ public class Drivetrain {
     double targetHeading = 0.0;
     double headingError;
     boolean isRotating = true;
-    boolean fieldMovement;
+    boolean fieldMovement = false ;
 
     // CONSTANTS
     final double DEADZONE = 0.05;
@@ -31,9 +31,12 @@ public class Drivetrain {
         this.tel = passedTel;
     }
     public void driveRobot(Gamepad gamepad, double motorSpeed, double heading) {
+        tel.log("FieldMovement", fieldMovement);
         if (fieldMovement) {
+            tel.log("Called fieldDrive", "no");
             fieldDrive(gamepad, heading, motorSpeed);
         } else {
+            tel.log("Called robotDrive", "yes");
             robotDrive(gamepad, motorSpeed);
         }
     }
@@ -101,7 +104,7 @@ public class Drivetrain {
         normal = -Math.cos(heading) * rightStickX + Math.sin(heading) * rightStickY;
 
         // ⚙️ Boost strafing power to compensate for strafing being slow
-        normal *= STRAFE_SCALAR;
+        normal *= -STRAFE_SCALAR;
 
         // Determine if the user is trying to rotate the robot
         isRotating = leftStickX != 0;

@@ -27,7 +27,6 @@ public class TeleOpMain extends OpMode {
     Sorter_Automation cycler = new Sorter_Automation();
     double heading;
     double motorSpeed = 0.8;
-    boolean fieldMovement = false;
     boolean manualSorter = true;
     boolean launcherActive = false;
 
@@ -109,7 +108,7 @@ public class TeleOpMain extends OpMode {
         //sorter.setPower(gamepad2.left_stick_x);
         sorter.setPos(gamepad2);
 
-        telemetry.addData("Sorter Position", sorterMotor.getCurrentPosition());
+//        telemetry.addData("Sorter Position", sorterMotor.getCurrentPosition());
         telemetry.addData("", "");
         telemetry.addData("IMU Position", heading * 180);
         telemetry.update();

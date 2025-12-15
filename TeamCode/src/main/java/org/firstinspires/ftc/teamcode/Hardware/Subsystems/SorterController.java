@@ -16,11 +16,11 @@ public class SorterController {
     public void init(RobotHardware passedRob, TelemetryManager passedTel) {
         this.rob = passedRob;
         this.tel = passedTel;
-        this.armPos = rob.sorterMotor.getCurrentPosition();
+        this.armPos = rob.launchRotateMotor.getCurrentPosition();
         this.distToPos = 0;
     }
     public void setPower(double power) {
-        rob.sorterMotor.setPower(power);
+        rob.launchRotateMotor.setPower(power);
     }
     public void rotateSorter(int targetPos) {
         int position = 5;
@@ -37,18 +37,18 @@ public class SorterController {
             position = Variables.intake3;
         } else {
             motorPower = false;
-            rob.sorterMotor.setPower(0);
+            rob.launchRotateMotor.setPower(0);
         }
 
         if (motorPower) {
             // Set target ONCE
-            rob.sorterMotor.setTargetPosition(position);
+            rob.launchRotateMotor.setTargetPosition(position);
             // Make sure mode is correct once at init, not every loop
-            rob.sorterMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            rob.launchRotateMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             // Keep power nonzero so PID loop can hold it
-            rob.sorterMotor.setPower(0.25);
+            rob.launchRotateMotor.setPower(0.25);
         }else {
-            rob.sorterMotor.setPower(0);
+            rob.launchRotateMotor.setPower(0);
         }
     }
 
@@ -58,20 +58,20 @@ public class SorterController {
         } else if (gamepad.a) {
             this.armPos -= 1;
         }
-        this.distToPos = this.armPos - rob.sorterMotor.getCurrentPosition();
-        rob.sorterMotor.setPower(distToPos * -0.5);
+        this.distToPos = this.armPos - rob.launchRotateMotor.getCurrentPosition();
+        rob.launchRotateMotor.setPower(distToPos * -0.5);
         tel.log("Sorter Motor Power: ", this.distToPos * -0.05);
         tel.log("distToPos: ", this.distToPos);
         tel.log("armPos", armPos);
-        tel.log("position", rob.sorterMotor.getCurrentPosition());
+        tel.log("position", rob.launchRotateMotor.getCurrentPosition());
 
     }
 
     public void setPos(Gamepad gamepad) {
         if (gamepad.a) {
-            rob.launchServo.setPosition(0.8);
+            rob.middleLaunchServoRight.setPosition(0.8);
         } else{
-            rob.launchServo.setPosition(0.3);
+            rob.middleLaunchServoRight.setPosition(0.3);
         }
     }
 
