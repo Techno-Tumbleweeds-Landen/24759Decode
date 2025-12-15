@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.OpModes.Auto;
+package org.firstinspires.ftc.teamcode.OpModes.AUTO;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -23,10 +23,8 @@ public class AUTOMain extends LinearOpMode {
     RobotHardware rob = new RobotHardware();   // REQUIRED
     @Override
     public void runOpMode() {
-<<<<<<< HEAD
         rob.init(hardwareMap);
 
-=======
         IMUSensor gyro = new IMUSensor();
         Drivetrain drivetrain = new Drivetrain();
         TelemetryManager tel = new TelemetryManager();
@@ -41,7 +39,6 @@ public class AUTOMain extends LinearOpMode {
         boolean fieldMovement = false;
 
         DcMotor wheel = hardwareMap.get(DcMotor.class, "leftFront");
->>>>>>> 22ea1c84155d2fccaa0754e440a18d50cfb4e825
         waitForStart();
         rob.leftFront.setPower(-0.1);
         rob.rightFront.setPower(-0.1);
