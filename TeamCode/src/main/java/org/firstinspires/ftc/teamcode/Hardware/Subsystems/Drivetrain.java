@@ -6,6 +6,7 @@ import org.firstinspires.ftc.teamcode.Software.Subsystems.IMUSensor;
 import org.firstinspires.ftc.teamcode.Software.Subsystems.Operators;
 import org.firstinspires.ftc.teamcode.Hardware.RobotHardware;
 import org.firstinspires.ftc.teamcode.Software.Subsystems.TelemetryManager;
+import org.firstinspires.ftc.teamcode.Software.Variables;
 
 public class Drivetrain {
     Operators ope = new Operators();
@@ -30,14 +31,14 @@ public class Drivetrain {
         this.rob = passedRob;
         this.tel = passedTel;
     }
-    public void driveRobot(Gamepad gamepad, double motorSpeed, double heading) {
+    public void controlRobot(Gamepad gamepad, Variables variables, double heading) {
         tel.log("FieldMovement", fieldMovement);
         if (fieldMovement) {
             tel.log("Called fieldDrive", "no");
-            fieldDrive(gamepad, heading, motorSpeed);
+            fieldDrive(gamepad, heading, variables.MEDSPEED);
         } else {
             tel.log("Called robotDrive", "yes");
-            robotDrive(gamepad, motorSpeed);
+            robotDrive(gamepad, variables.MEDSPEED);
         }
     }
     public void resetIMU(Boolean reset, IMUSensor gyro) {

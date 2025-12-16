@@ -7,8 +7,8 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
 import org.firstinspires.ftc.teamcode.Hardware.RobotHardware;
 import org.firstinspires.ftc.teamcode.Hardware.Subsystems.Drivetrain;
+import org.firstinspires.ftc.teamcode.Hardware.Subsystems.FlywheelController;
 import org.firstinspires.ftc.teamcode.Hardware.Subsystems.IntakeController;
-import org.firstinspires.ftc.teamcode.Hardware.Subsystems.LauncherController;
 import org.firstinspires.ftc.teamcode.Hardware.Subsystems.SorterController;
 import org.firstinspires.ftc.teamcode.Software.Subsystems.Sorter_Automation;
 import org.firstinspires.ftc.teamcode.Software.Subsystems.IMUSensor;
@@ -33,7 +33,7 @@ public class AUTOMain extends LinearOpMode {
 
         IntakeController intake = new IntakeController();
         SorterController sorter = new SorterController();
-        LauncherController launcher = new LauncherController();
+        FlywheelController launcher = new FlywheelController();
         Sorter_Automation cycler = new Sorter_Automation();
         double heading;
         boolean fieldMovement = false;

@@ -32,14 +32,14 @@ public class Launcher extends OpMode {
     @Override
     public void loop() {
         if (gamepad1.a) {
-            robot.launchMotor.setPower(0.5);
+            robot.flywheelMotor.setPower(0.5);
             //robot.leftLaunch.setPower(1);
         } else if (gamepad1.b) {
-            robot.launchMotor.setPower(0.35);
+            robot.flywheelMotor.setPower(0.35);
         }
         else {
-            robot.launchMotor.setPower(gamepad1.left_trigger); // stop when button not pressed
-            tel.log("speed",robot.launchMotor.getPower());
+            robot.flywheelMotor.setPower(gamepad1.left_trigger); // stop when button not pressed
+            tel.log("speed",robot.flywheelMotor.getPower());
 
             //robot.leftLaunch.setPower(0);
         }

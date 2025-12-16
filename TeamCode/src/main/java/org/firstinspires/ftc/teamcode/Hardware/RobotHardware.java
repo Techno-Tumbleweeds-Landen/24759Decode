@@ -10,7 +10,7 @@ import com.qualcomm.robotcore.hardware.Servo;   // add this import
 
 public class RobotHardware {
     public DcMotor leftFront, rightFront, leftBack, rightBack;
-    public DcMotor launchMotor, intakeMotor, launchRotateMotor;
+    public DcMotor flywheelMotor, intakeMotor, launchRotateMotor;
     public IMU imu;
     public DigitalChannel magneticSwitch;   // Magnetic Limit Switch
     public Servo rgbLight, leftLaunchServo, rightLaunchServo, middleLaunchServoLeft, middleLaunchServoRight;
@@ -23,7 +23,7 @@ public class RobotHardware {
         leftBack = hwMap.get(DcMotor.class, "leftBack");
         rightBack = hwMap.get(DcMotor.class, "rightBack");
         // Motor Names and Variables (other)
-        launchMotor = hwMap.get(DcMotor.class, "launchMotor");
+        flywheelMotor = hwMap.get(DcMotor.class, "launchMotor");
         intakeMotor = hwMap.get(DcMotor.class, "intakeMotor");
         launchRotateMotor = hwMap.get(DcMotor.class, "launchRotator");
         // Servo Names and Variables
@@ -50,8 +50,8 @@ public class RobotHardware {
         rightBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         // Test motor
-        launchMotor.setDirection(DcMotor.Direction.REVERSE);
-        launchMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        flywheelMotor.setDirection(DcMotor.Direction.REVERSE);
+        flywheelMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         launchRotateMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         launchRotateMotor.setDirection(DcMotor.Direction.REVERSE);

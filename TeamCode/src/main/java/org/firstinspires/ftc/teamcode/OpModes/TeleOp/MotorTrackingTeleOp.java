@@ -32,7 +32,7 @@ public class MotorTrackingTeleOp extends OpMode {
         rotate.init(robot,tel);
 
         // Create limit reset helper
-        limitReset = new MagneticLimitSwitch(robot.launchMotor, robot.magneticSwitch);
+        limitReset = new MagneticLimitSwitch(robot.flywheelMotor, robot.magneticSwitch);
     }
 
     @Override
@@ -50,8 +50,8 @@ public class MotorTrackingTeleOp extends OpMode {
             rotate.rotateSorter(4); // stop motor
         }
 
-        telemetry.addData("Position", robot.launchMotor.getCurrentPosition());
-        telemetry.addData("Busy?", robot.launchMotor.isBusy());
+        telemetry.addData("Position", robot.flywheelMotor.getCurrentPosition());
+        telemetry.addData("Busy?", robot.flywheelMotor.isBusy());
         telemetry.addData("Limit Pressed", limitReset.isPressed());
         telemetry.update();
     }

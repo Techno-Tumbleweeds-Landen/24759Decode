@@ -10,9 +10,11 @@ public class Variables {
     public static final int launch1 = 3;
     public static final int launch2 = 4;
     public static final int launch3 = 4;
+    public final double intakeSpeed = 0.75;
 
-    // Motor Speeds
-    public static final double LOWSPEED = 0.25;
-    public static final double MEDSPEED = 0.5;
-    public static final double HIGHSPEED = 0.75;
+
+    // Robot Speeds
+    public final double LOWSPEED = 0.25;
+    public final double MEDSPEED = 0.5;
+    public final double HIGHSPEED = 0.75;
 }
