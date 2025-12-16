@@ -54,18 +54,23 @@ public class TeleOpMain extends OpMode {
         // GET HEADING
         heading = gyro.getHeading();
 
+        // CONTROLS SORTER
+        sorter.controlSorter(gamepad2);
+
         // CONTROLS FLYWHEEL
         launcher.toggleFlywheel(gamepad2.rightBumperWasPressed());
         launcher.controlFlywheel(gamepad2, 0.90);
 
         // CONTROLS INTAKE
-        intake.toggleIntake(gamepad1.startWasPressed());
+        intake.toggleIntake(gamepad2.startWasPressed());
         intake.controlIntake(gamepad2, variables);
 
         // CONTROLS DRIVETRAIN
         drivetrain.changeMovement(gamepad1.leftBumperWasPressed());
         drivetrain.controlRobot(gamepad1, variables, heading);
         drivetrain.resetIMU(gamepad1.a, gyro);
+
+        // CONTROLS SORTER)
 
         // TELEMETRY
         telemetry.addData("", "");

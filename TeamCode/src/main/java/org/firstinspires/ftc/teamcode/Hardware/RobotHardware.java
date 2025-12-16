@@ -45,15 +45,16 @@ public class RobotHardware {
         leftBack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         rightBack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-        // Motor Zero Power Behavior
+        // drivetrain zero power behavior
         leftFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         leftBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        // Test motor
+        // Flywheel motor
         flywheelMotor.setDirection(DcMotor.Direction.REVERSE);
         flywheelMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        flywheelMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         launchRotateMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         launchRotateMotor.setDirection(DcMotor.Direction.REVERSE);

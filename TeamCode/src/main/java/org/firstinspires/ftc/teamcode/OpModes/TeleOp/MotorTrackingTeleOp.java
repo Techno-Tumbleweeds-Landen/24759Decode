@@ -40,15 +40,8 @@ public class MotorTrackingTeleOp extends OpMode {
         // Check the magnetic limit switch each loop
         limitReset.checkAndReset();
 
-        if (gamepad1.a) {
-            rotate.rotateSorter(0);
-        } else if (gamepad1.b) {
-            rotate.rotateSorter(1);
-        } else if (gamepad1.x) {
-            rotate.rotateSorter(2);
-        } else {
-            rotate.rotateSorter(4); // stop motor
-        }
+
+
 
         telemetry.addData("Position", robot.flywheelMotor.getCurrentPosition());
         telemetry.addData("Busy?", robot.flywheelMotor.isBusy());
