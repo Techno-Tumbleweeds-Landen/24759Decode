@@ -49,64 +49,66 @@ public class TeleOpMain extends OpMode {
     @Override
     public void loop() {
 
-        heading = gyro.getHeading();
-        if (gamepad2.leftBumperWasPressed()) {
-            manualSorter = !manualSorter;
-        }
-        if (gamepad2.rightBumperWasPressed() || gamepad1.rightBumperWasPressed()) {
-            launcherActive = !launcherActive;
-        }
+//        heading = gyro.getHeading();
+//        if (gamepad2.leftBumperWasPressed()) {
+//            manualSorter = !manualSorter;
+//        }
+//        if (gamepad2.rightBumperWasPressed() || gamepad1.rightBumperWasPressed()) {
+//            launcherActive = !launcherActive;
+//        }
+//
+//        if (gamepad2.startWasPressed()) {
+//            intakeActive = !intakeActive;
+//        }
+//
+//        if (launcherActive) {
+//            launcher.setPower(0.90);
+//        } else {
+//            launcher.setPower(gamepad2.right_stick_y);
+//        }
+///*
+//        if (intakeActive) {
+//            rob.intakeMotor.setPower(0.75);
+//        } else {
+//            rob.intakeMotor.setPower(0);
+//        }
+//
+// */
+//
+//        if (manualSorter) {
+//            sorter.setPower(gamepad2.left_stick_x / 2);
+//        } else {
+//            //sorter.PIDSorter(gamepad2);
+//            cycler.update(gamepad2);
+//        }
+//
+//        // CONTROLS DRIVETRAIN
+//        drivetrain.changeMovement(gamepad1.leftBumperWasPressed());
+//        drivetrain.driveRobot(gamepad1, motorSpeed, heading);
+//        drivetrain.resetIMU(gamepad1.a, gyro);
+//
+//
+//        if (intakeActive){
+//            rob.intakeMotor.setPower(0.95);
+//        } else {
+//            intake.setPower(gamepad2.right_trigger - gamepad2.left_trigger);
+//        }
+//
+//        if (gamepad1.rightBumperWasPressed()) {
+//            intakeActive = !intakeActive;
+//        }
+//
+//        if (intakeActive) {
+//            rob.intakeMotor.setPower(0.75);
+//        }else{
+//            rob.intakeMotor.setPower(0);
+//        }
+//
+//        intake.setPower(gamepad2.right_trigger - gamepad2.left_trigger);
+//        //sorter.setPower(gamepad2.left_stick_x);
+//        sorter.setPos(gamepad2);
 
-        if (gamepad2.startWasPressed()) {
-            intakeActive = !intakeActive;
-        }
-
-        if (launcherActive) {
-            launcher.setPower(0.90);
-        } else {
-            launcher.setPower(gamepad2.right_stick_y);
-        }
-/*
-        if (intakeActive) {
-            rob.intakeMotor.setPower(0.75);
-        } else {
-            rob.intakeMotor.setPower(0);
-        }
-
- */
-
-        if (manualSorter) {
-            sorter.setPower(gamepad2.left_stick_x / 2);
-        } else {
-            //sorter.PIDSorter(gamepad2);
-            cycler.update(gamepad2);
-        }
-
-        // CONTROLS DRIVETRAIN
-        drivetrain.changeMovement(gamepad1.leftBumperWasPressed());
-        drivetrain.driveRobot(gamepad1, motorSpeed, heading);
-        drivetrain.resetIMU(gamepad1.a, gyro);
-
-
-        if (intakeActive){
-            rob.intakeMotor.setPower(0.95);
-        } else {
-            intake.setPower(gamepad2.right_trigger - gamepad2.left_trigger);
-        }
-
-        if (gamepad1.rightBumperWasPressed()) {
-            intakeActive = !intakeActive;
-        }
-
-        if (intakeActive) {
-            rob.intakeMotor.setPower(0.75);
-        }else{
-            rob.intakeMotor.setPower(0);
-        }
-
-        intake.setPower(gamepad2.right_trigger - gamepad2.left_trigger);
-        //sorter.setPower(gamepad2.left_stick_x);
-        sorter.setPos(gamepad2);
+        rob.hood.setPosition(gamepad2.right_stick_y);
 
 //        telemetry.addData("Sorter Position", sorterMotor.getCurrentPosition());
         telemetry.addData("", "");
