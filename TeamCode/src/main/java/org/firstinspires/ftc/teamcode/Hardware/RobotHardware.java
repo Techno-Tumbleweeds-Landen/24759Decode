@@ -13,7 +13,7 @@ public class RobotHardware {
     public DcMotor flywheelMotor, intakeMotor, launchRotateMotor;
     public IMU imu;
     public DigitalChannel magneticSwitch;   // Magnetic Limit Switch
-    public Servo rgbLight, leftLaunchServo, rightLaunchServo, middleLaunchServoLeft, middleLaunchServoRight;
+    public Servo rgbLight, leftLaunchServo, rightLaunchServo, middleLaunchServoLeft, middleLaunchServoRight, hood;
 
 
     public void init(HardwareMap hwMap) {
@@ -31,6 +31,8 @@ public class RobotHardware {
         rightLaunchServo = hwMap.get(Servo.class, "rightLaunch"); // port 1
         middleLaunchServoLeft = hwMap.get(Servo.class, "middleLeftLaunch"); // port 2
         middleLaunchServoRight = hwMap.get(Servo.class, "middleRightLaunch"); // port 3
+        hood = hwMap.get(Servo.class, "hood"); // port 4
+
         // Drivetrain Motor Directions
         leftFront.setDirection(DcMotor.Direction.REVERSE);
         rightFront.setDirection(DcMotor.Direction.FORWARD);

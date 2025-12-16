@@ -9,7 +9,8 @@
 |         | 1 rightLaunch       |                |   | 1             |               |
 |         | 2 middleLeftLaunch  |                |   | 2             |               |
 |         | 3 middleRightLaunch |                |   | 3             |               |
-|         | 4                   |                |   | 4             |               |
+|         | 4 hood              |                |   | 4             |               |
+|         | 5                   |                |   | 5             |               |
 |         |                     |                |   |               |               |
 | CAMERA  |                     | Webcam 1       |   |               |               |
 |         |                     |                |   |               |               |
