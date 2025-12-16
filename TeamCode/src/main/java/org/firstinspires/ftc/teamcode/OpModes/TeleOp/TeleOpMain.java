@@ -108,11 +108,9 @@ public class TeleOpMain extends OpMode {
 //        //sorter.setPower(gamepad2.left_stick_x);
 //        sorter.setPos(gamepad2);
 
-        rob.hood.setPosition(gamepad2.right_stick_y);
-
 //        telemetry.addData("Sorter Position", sorterMotor.getCurrentPosition());
         telemetry.addData("", "");
         telemetry.addData("IMU Position", heading * 180);
-        telemetry.update();
+
     }
 }
