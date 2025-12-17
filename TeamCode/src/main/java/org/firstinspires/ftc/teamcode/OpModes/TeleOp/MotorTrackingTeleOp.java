@@ -15,8 +15,8 @@ public class MotorTrackingTeleOp extends OpMode {
     // Subsystems
     IMUSensor gyro = new IMUSensor();
     RobotHardware robot = new RobotHardware();
-    Drivetrain move = new Drivetrain();
     TelemetryManager tel = new TelemetryManager();
+    Drivetrain move = new Drivetrain(robot, tel);
     SorterController rotate;
     MagneticLimitSwitch limitReset;
 

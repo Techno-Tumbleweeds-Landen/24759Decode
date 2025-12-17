@@ -12,11 +12,10 @@ import org.firstinspires.ftc.teamcode.Software.Subsystems.TelemetryManager;
 
 @TeleOp
 public class Launcher extends OpMode {
-    IMUSensor gyr = new IMUSensor();
-    Drivetrain mov = new Drivetrain();
     RobotHardware robot = new RobotHardware();
-
     TelemetryManager tel = new TelemetryManager();
+    IMUSensor gyr = new IMUSensor();
+    Drivetrain mov = new Drivetrain(robot, tel);
 
 
     double heading;
@@ -26,7 +25,6 @@ public class Launcher extends OpMode {
         robot.init(hardwareMap);  // initialize hardware
         tel.init(telemetry);
         gyr.init(robot);
-        mov.init(robot, tel);
     }
 
     @Override

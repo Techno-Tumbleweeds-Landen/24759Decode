@@ -20,14 +20,15 @@ import org.firstinspires.ftc.teamcode.Hardware.Subsystems.Drivetrain;
 
 @Autonomous
 public class AUTOMain extends LinearOpMode {
-    RobotHardware rob = new RobotHardware();   // REQUIRED
+    RobotHardware rob = new RobotHardware();
+    TelemetryManager tel = new TelemetryManager();
+    Drivetrain drivetrain = new Drivetrain(rob, tel);
+
     @Override
     public void runOpMode() {
         rob.init(hardwareMap);
 
         IMUSensor gyro = new IMUSensor();
-        Drivetrain drivetrain = new Drivetrain();
-        TelemetryManager tel = new TelemetryManager();
 
         RobotHardware rob = new RobotHardware();   // only once
 

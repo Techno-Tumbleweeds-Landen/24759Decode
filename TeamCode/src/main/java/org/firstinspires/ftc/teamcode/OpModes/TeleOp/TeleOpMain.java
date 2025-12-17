@@ -18,10 +18,10 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 @TeleOp
 public class TeleOpMain extends OpMode {
 
-    IMUSensor gyro = new IMUSensor();
-    Drivetrain drivetrain = new Drivetrain();
+    RobotHardware rob = new RobotHardware();
     TelemetryManager tel = new TelemetryManager();
-    RobotHardware rob = new RobotHardware();   // only once
+    Drivetrain drivetrain = new Drivetrain(rob, tel);
+    IMUSensor gyro = new IMUSensor();
     IntakeController intake = new IntakeController();
     SorterController sorter = new SorterController();
     FlywheelController launcher = new FlywheelController();
@@ -41,7 +41,6 @@ public class TeleOpMain extends OpMode {
         rob.init(hardwareMap);
         tel.init(telemetry);
         gyro.init(rob);
-        drivetrain.init(rob, tel);
         intake.init(rob, tel);
         sorter.init(rob, tel);
         launcher.init(rob, tel);

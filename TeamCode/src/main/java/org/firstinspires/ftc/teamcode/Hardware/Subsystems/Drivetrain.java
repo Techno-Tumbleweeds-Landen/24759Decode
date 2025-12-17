@@ -26,11 +26,17 @@ public class Drivetrain {
     final double ROTATE_SCALAR = 0.5;
     double HEADING_CORRECTION = 0.5;
 
-
-    public void init(RobotHardware passedRob, TelemetryManager passedTel) {
+    /**
+     * Constructor method to initialize drivetrain with robotHardware and telemetryManager
+     *
+     * @param passedRob RobotHardware object to be used in the class
+     * @param passedTel TelemetryManager object to be used in the class
+     */
+    public Drivetrain(RobotHardware passedRob, TelemetryManager passedTel) {
         this.rob = passedRob;
         this.tel = passedTel;
     }
+
     public void controlRobot(Gamepad gamepad, Variables variables, double heading) {
         tel.log("FieldMovement", fieldMovement);
         if (fieldMovement) {
@@ -94,23 +100,23 @@ public class Drivetrain {
         rightStickY = gamepad1.right_stick_y;
         rightStickX = gamepad1.right_stick_x;        
 
-        // 🧼 Apply deadzone to all joystick inputs
+        // Apply deadzone to all joystick inputs
         leftStickY = (Math.abs(leftStickY) < DEADZONE) ? 0.0 : leftStickY;
         leftStickX = (Math.abs(leftStickX) < DEADZONE) ? 0.0 : leftStickX;
         rightStickY = (Math.abs(rightStickY) < DEADZONE) ? 0.0 : rightStickY;
         rightStickX = (Math.abs(rightStickX) < DEADZONE) ? 0.0 : rightStickX;
 
-        // 🧭 Field-oriented fielddrive using imu heading
+        // Field-oriented fielddrive using imu heading
         tangent = Math.sin(heading) * rightStickX + Math.cos(heading) * rightStickY;
         normal = -Math.cos(heading) * rightStickX + Math.sin(heading) * rightStickY;
 
-        // ⚙️ Boost strafing power to compensate for strafing being slow
+        // Boost strafing power to compensate for strafing being slow
         normal *= -STRAFE_SCALAR;
 
         // Determine if the user is trying to rotate the robot
         isRotating = leftStickX != 0;
 
-        // 🛡️ Heading hold correction during pure strafing
+        // Heading hold correction during pure strafing
         if (isRotating) {
             targetHeading = heading;
             rotate = leftStickX * ROTATE_SCALAR;
@@ -122,19 +128,19 @@ public class Drivetrain {
 
 
 
-        // 🧮 Calculate motor powers
+        // Calculate motor powers
         rfPow = tangent - normal + rotate;
         rbPow = tangent + normal + rotate;
         lbPow = tangent - normal - rotate;
         lfPow = tangent + normal - rotate;
 
-        // 🧼 Clamp motor powers
+        // Clamp motor powers
         rfPow = ope.clamp(rfPow, -1, 1);
         rbPow = ope.clamp(rbPow, -1, 1);
         lbPow = ope.clamp(lbPow, -1, 1);
         lfPow = ope.clamp(lfPow, -1, 1);
 
-        // 🚀 Apply motor speed scaling
+        // Apply motor speed scaling
         rob.rightFront.setPower(rfPow * motorSpeed);
         rob.rightBack.setPower(rbPow * motorSpeed);
         rob.leftBack.setPower(lbPow * motorSpeed);
