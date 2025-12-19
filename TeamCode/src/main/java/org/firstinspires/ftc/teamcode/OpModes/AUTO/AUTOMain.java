@@ -6,9 +6,10 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.teamcode.Hardware.RobotHardware;
 import org.firstinspires.ftc.teamcode.Hardware.Subsystems.Drivetrain;
+import org.firstinspires.ftc.teamcode.Hardware.Subsystems.FlickerController;
 import org.firstinspires.ftc.teamcode.Hardware.Subsystems.FlywheelController;
 import org.firstinspires.ftc.teamcode.Hardware.Subsystems.IntakeController;
-import org.firstinspires.ftc.teamcode.Hardware.Subsystems.SorterController;
+import org.firstinspires.ftc.teamcode.Hardware.Subsystems.FlickerController;
 import org.firstinspires.ftc.teamcode.Software.Subsystems.IMUSensor;
 import org.firstinspires.ftc.teamcode.Software.Subsystems.TelemetryManager;
 
@@ -17,16 +18,24 @@ import org.firstinspires.ftc.teamcode.Software.Variables;
 
 @Autonomous
 public class AUTOMain extends LinearOpMode {
-    Variables var = new Variables();
-    RobotHardware rob = new RobotHardware(hardwareMap);
-    TelemetryManager tel = new TelemetryManager(telemetry);
-    Drivetrain drivetrain = new Drivetrain(rob, tel, var);
-    IntakeController intake = new IntakeController(rob, tel, var);
-    FlywheelController launcher = new FlywheelController(rob, tel, var);
-    SorterController sorter = new SorterController(rob, tel, var);
-    IMUSensor gyro = new IMUSensor(rob);
+    Variables var;
+    RobotHardware rob;
+    TelemetryManager tel ;
+    Drivetrain drivetrain;
+    IntakeController intake;
+    FlickerController sorter;
+    FlywheelController launcher;
+    IMUSensor gyro;
     @Override
     public void runOpMode() {
+        var = new Variables();
+        rob = new RobotHardware(hardwareMap);
+        tel = new TelemetryManager(telemetry);
+        drivetrain = new Drivetrain(rob, tel, var);
+        intake = new IntakeController(rob, tel, var);
+        sorter = new FlickerController(rob, tel, var);
+        launcher = new FlywheelController(rob, tel, var);
+        gyro = new IMUSensor(rob);
 
         double heading;
         boolean fieldMovement = false;

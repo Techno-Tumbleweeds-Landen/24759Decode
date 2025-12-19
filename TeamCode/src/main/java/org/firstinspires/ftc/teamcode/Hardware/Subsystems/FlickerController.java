@@ -1,6 +1,5 @@
 package org.firstinspires.ftc.teamcode.Hardware.Subsystems;
 
-import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Gamepad;
 
 import org.firstinspires.ftc.teamcode.Hardware.RobotHardware;
@@ -8,20 +7,20 @@ import org.firstinspires.ftc.teamcode.Hardware.RobotHardware;
 import org.firstinspires.ftc.teamcode.Software.Subsystems.TelemetryManager;
 import org.firstinspires.ftc.teamcode.Software.Variables;
 
-public class SorterController {
+public class FlickerController {
     RobotHardware rob;
     TelemetryManager tel;
     Variables var;
     double distToPos, armPos;
 
-    public SorterController(RobotHardware passedRob, TelemetryManager passedTel, Variables passedVar) {
+    public FlickerController(RobotHardware passedRob, TelemetryManager passedTel, Variables passedVar) {
         this.rob = passedRob;
         this.tel = passedTel;
         this.var = passedVar;
     }
 
 
-    public void controlSorter(Gamepad gamepad) {
+    public void controlFlickers(Gamepad gamepad) {
         if (gamepad.b) {
             rob.rightLaunchServo.setPosition(0.54);
         } else if (gamepad.start) {
