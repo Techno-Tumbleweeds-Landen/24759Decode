@@ -9,20 +9,17 @@ import org.firstinspires.ftc.teamcode.Hardware.RobotHardware;
 
 @TeleOp
 public class Testing extends OpMode {
-//    RobotHardware robot;
+    RobotHardware robot;
 
     DcMotor test;
     @Override
     public void init() {
         telemetry.addData("Status", "Initialized");
-//        robot = new RobotHardware(hardwareMap);
-        test = hardwareMap.get(DcMotor.class, "launchRotator");
+        robot = new RobotHardware(hardwareMap);
     }
 
     @Override
     public void loop() {
         telemetry.addData("Status", "Running");
-//        robot.leftFront.setPower(0.69);
-        test.setPower(gamepad2.right_trigger);
     }
 }

@@ -9,9 +9,13 @@ public class Variables {
     // Launch Positions
     public final double intakeSpeed = 0.75;
 
-    //FLICKER SERVO POSITIONS
+    //SERVO POSITIONS
     public final double LEFT_SERVO_DOWN = 0.33;
     public final double LEFT_SERVO_UP = 0.63;
+    public final double HOOD_DOWN = 0.38;
+    public final double HOOD_UP = 1;
+
+
 
 
     // Robot Speeds

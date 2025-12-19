@@ -34,24 +34,21 @@ public class LauncherController {
     }
     public void controlHood(Gamepad gamepad) {
 
-        // Invert stick so up = increase
-        double stick = gamepad.left_stick_y;   // [-1, +1]
+        // Convert stick from [-1, 1] to [0, 1]
+        double input = (-gamepad.left_stick_y + 1.0) / 2.0;
 
-        // Map stick -> logical range [-1.0, -0.3826]
-        double logicalPos =
-                -0.3826 + (-1.0 + 0.38) * ((stick + 1.0) / 2.0);
+        // Clamp for safety
+        input = Math.max(0.0, Math.min(input, var.HOOD_UP));
 
-        // Map logical range -> servo range [0.0, 1.0]
-        double servoPos =
-                (logicalPos - (-1.0)) / (-0.38 - (-1.0));
+        // Map [0,1] → [0.38,1.0]
+        double servoPos = var.HOOD_DOWN + (var.HOOD_UP - var.HOOD_DOWN) * input;
 
-        if (gamepad.square) {
-            rob.hood.setPosition(servoPos);
-        }
+        rob.hood.setPosition(servoPos);
 
-        tel.log("stick", stick);
-        tel.log("servoPos", rob.hood.getPosition());
+        tel.log("input", input);
+        tel.log("servoPos", servoPos);
     }
+
 
     public void controlLaunchRotate(Gamepad gamepad) {
         rob.launchRotateMotor.setPower(gamepad.left_stick_x);

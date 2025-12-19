@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.Hardware;
 
+import com.qualcomm.hardware.limelightvision.Limelight3A;
 import com.qualcomm.robotcore.hardware.DcMotor;
 //import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -15,6 +16,7 @@ public class RobotHardware {
     public DigitalChannel magneticSwitch;   // Magnetic Limit Switch
     public Servo rgbLight, leftLaunchServo, rightLaunchServo, middleLaunchServoLeft, middleLaunchServoRight, hood;
 
+    public Limelight3A limelight;
 
     public RobotHardware(HardwareMap hwMap) {
         // Motor Names and Variables (drivetrain)
@@ -65,6 +67,9 @@ public class RobotHardware {
         // IMU sensor
         imu = hwMap.get(IMU.class, "imu");
 
+        // limelight
+        limelight = hwMap.get(Limelight3A.class, "limeLight");
+        limelight.pipelineSwitch(1);
         rgbLight = hwMap.get(Servo.class, "light1");
     }
 }
