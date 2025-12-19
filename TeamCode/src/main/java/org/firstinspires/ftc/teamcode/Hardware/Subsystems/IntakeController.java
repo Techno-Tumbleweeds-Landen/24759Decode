@@ -20,7 +20,6 @@ public class IntakeController {
     }
 
     public void controlIntake(Gamepad gamepad) {
-        tel.log("Intake Active", intakeActive);
         if (intakeActive) {
             rob.intakeMotor.setPower(var.intakeSpeed);
         } else {

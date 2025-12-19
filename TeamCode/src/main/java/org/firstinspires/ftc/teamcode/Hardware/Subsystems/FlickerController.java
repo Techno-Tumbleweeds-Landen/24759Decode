@@ -11,7 +11,6 @@ public class FlickerController {
     RobotHardware rob;
     TelemetryManager tel;
     Variables var;
-    double distToPos, armPos;
 
     public FlickerController(RobotHardware passedRob, TelemetryManager passedTel, Variables passedVar) {
         this.rob = passedRob;
@@ -22,11 +21,11 @@ public class FlickerController {
 
     public void controlFlickers(Gamepad gamepad) {
         if (gamepad.b) {
-            rob.rightLaunchServo.setPosition(0.54);
+            rob.rightLaunchServo.setPosition(var.LEFT_SERVO_UP);
         } else if (gamepad.start) {
             rob.rightLaunchServo.setPosition(gamepad.right_stick_x);
         } else {
-            rob.rightLaunchServo.setPosition(0.26);
+            rob.rightLaunchServo.setPosition(var.LEFT_SERVO_DOWN);
         }
     }
 

@@ -56,11 +56,8 @@ public class RobotHardware {
         flywheelMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         flywheelMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        launchRotateMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         launchRotateMotor.setDirection(DcMotor.Direction.REVERSE);
         launchRotateMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-
-
 
         // NON-ACTUATOR COMPONENTS
         magneticSwitch = hwMap.get(DigitalChannel.class, "magneticSwitch");

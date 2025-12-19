@@ -6,14 +6,11 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import org.firstinspires.ftc.teamcode.Hardware.RobotHardware;
 import org.firstinspires.ftc.teamcode.Hardware.Subsystems.Drivetrain;
 import org.firstinspires.ftc.teamcode.Hardware.Subsystems.FlickerController;
-import org.firstinspires.ftc.teamcode.Hardware.Subsystems.FlywheelController;
+import org.firstinspires.ftc.teamcode.Hardware.Subsystems.LauncherController;
 import org.firstinspires.ftc.teamcode.Hardware.Subsystems.IntakeController;
-import org.firstinspires.ftc.teamcode.Hardware.Subsystems.FlickerController;
 import org.firstinspires.ftc.teamcode.Software.Subsystems.IMUSensor;
 import org.firstinspires.ftc.teamcode.Software.Subsystems.TelemetryManager;
 import org.firstinspires.ftc.teamcode.Software.Variables;
-
-import com.qualcomm.robotcore.hardware.DcMotor;
 
 @TeleOp
 public class TeleOpMain extends OpMode {
@@ -24,7 +21,7 @@ public class TeleOpMain extends OpMode {
     Drivetrain drivetrain;
     IntakeController intake;
     FlickerController flickers;
-    FlywheelController launcher;
+    LauncherController launcher;
     IMUSensor gyro;
     double heading;
 
@@ -36,7 +33,7 @@ public class TeleOpMain extends OpMode {
         drivetrain = new Drivetrain(rob, tel, var);
         intake = new IntakeController(rob, tel, var);
         flickers = new FlickerController(rob, tel, var);
-        launcher = new FlywheelController(rob, tel, var);
+        launcher = new LauncherController(rob, tel, var);
         gyro = new IMUSensor(rob);
     }
 
@@ -49,9 +46,14 @@ public class TeleOpMain extends OpMode {
         // CONTROLS SORTER
         flickers.controlFlickers(gamepad2);
 
-        // CONTROLS FLYWHEEL
+        // CONTROLS LAUNCHER (flywheel, hood, & rotator)
+        // flywheel control
         launcher.toggleFlywheel(gamepad2.rightBumperWasPressed());
         launcher.controlFlywheel(gamepad2, 0.90);
+        // hood control
+        launcher.controlHood(gamepad2);
+        // rotator control
+        launcher.controlLaunchRotate(gamepad2);
 
         // CONTROLS INTAKE
         intake.toggleIntake(gamepad2.startWasPressed());

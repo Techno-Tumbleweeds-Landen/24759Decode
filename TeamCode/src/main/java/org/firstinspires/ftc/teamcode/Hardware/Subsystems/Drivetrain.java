@@ -42,10 +42,8 @@ public class Drivetrain {
     public void controlRobot(Gamepad gamepad, double heading) {
         tel.log("FieldMovement", fieldMovement);
         if (fieldMovement) {
-            tel.log("Called fieldDrive", "no");
             fieldDrive(gamepad, heading, var.MEDSPEED);
         } else {
-            tel.log("Called robotDrive", "yes");
             robotDrive(gamepad, var.MEDSPEED);
         }
     }

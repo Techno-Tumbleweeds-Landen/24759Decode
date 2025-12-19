@@ -7,9 +7,8 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import org.firstinspires.ftc.teamcode.Hardware.RobotHardware;
 import org.firstinspires.ftc.teamcode.Hardware.Subsystems.Drivetrain;
 import org.firstinspires.ftc.teamcode.Hardware.Subsystems.FlickerController;
-import org.firstinspires.ftc.teamcode.Hardware.Subsystems.FlywheelController;
+import org.firstinspires.ftc.teamcode.Hardware.Subsystems.LauncherController;
 import org.firstinspires.ftc.teamcode.Hardware.Subsystems.IntakeController;
-import org.firstinspires.ftc.teamcode.Hardware.Subsystems.FlickerController;
 import org.firstinspires.ftc.teamcode.Software.Subsystems.IMUSensor;
 import org.firstinspires.ftc.teamcode.Software.Subsystems.TelemetryManager;
 
@@ -24,7 +23,7 @@ public class AUTOMain extends LinearOpMode {
     Drivetrain drivetrain;
     IntakeController intake;
     FlickerController sorter;
-    FlywheelController launcher;
+    LauncherController launcher;
     IMUSensor gyro;
     @Override
     public void runOpMode() {
@@ -34,7 +33,7 @@ public class AUTOMain extends LinearOpMode {
         drivetrain = new Drivetrain(rob, tel, var);
         intake = new IntakeController(rob, tel, var);
         sorter = new FlickerController(rob, tel, var);
-        launcher = new FlywheelController(rob, tel, var);
+        launcher = new LauncherController(rob, tel, var);
         gyro = new IMUSensor(rob);
 
         double heading;
