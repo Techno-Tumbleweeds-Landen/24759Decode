@@ -11,12 +11,13 @@ import org.firstinspires.ftc.teamcode.Software.Variables;
 public class SorterController {
     RobotHardware rob;
     TelemetryManager tel;
-    Variables variables;
+    Variables var;
     double distToPos, armPos;
 
-    public void init(RobotHardware passedRob, TelemetryManager passedTel) {
+    public SorterController(RobotHardware passedRob, TelemetryManager passedTel, Variables passedVar) {
         this.rob = passedRob;
         this.tel = passedTel;
+        this.var = passedVar;
     }
 
 

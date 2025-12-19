@@ -4,15 +4,18 @@ import com.qualcomm.robotcore.hardware.Gamepad;
 
 import org.firstinspires.ftc.teamcode.Hardware.RobotHardware;
 import org.firstinspires.ftc.teamcode.Software.Subsystems.TelemetryManager;
+import org.firstinspires.ftc.teamcode.Software.Variables;
 
 public class FlywheelController {
     RobotHardware rob;
     TelemetryManager tel;
+    Variables var;
     Boolean isActive = false;
 
-    public void init(RobotHardware passedRob, TelemetryManager passedTel) {
+    public FlywheelController(RobotHardware passedRob, TelemetryManager passedTel, Variables passedVar) {
         this.rob = passedRob;
         this.tel = passedTel;
+        this.var = passedVar;
     }
 
     public void controlFlywheel(Gamepad gamepad, double power) {

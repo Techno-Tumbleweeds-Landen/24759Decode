@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Hardware.Subsystems;
+package org.firstinspires.ftc.teamcode.OpModes.TeleOp;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -10,8 +10,7 @@ public class HoodControl extends OpMode {
     RobotHardware rob;
     @Override
     public void init() {
-        rob = new RobotHardware();
-        rob.init(hardwareMap);
+        rob = new RobotHardware(hardwareMap);
     }
 
     @Override

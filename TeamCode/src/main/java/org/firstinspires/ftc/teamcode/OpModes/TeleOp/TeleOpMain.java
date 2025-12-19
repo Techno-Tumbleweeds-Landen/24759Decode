@@ -8,7 +8,6 @@ import org.firstinspires.ftc.teamcode.Hardware.Subsystems.Drivetrain;
 import org.firstinspires.ftc.teamcode.Hardware.Subsystems.FlywheelController;
 import org.firstinspires.ftc.teamcode.Hardware.Subsystems.IntakeController;
 import org.firstinspires.ftc.teamcode.Hardware.Subsystems.SorterController;
-import org.firstinspires.ftc.teamcode.Software.Subsystems.Sorter_Automation;
 import org.firstinspires.ftc.teamcode.Software.Subsystems.IMUSensor;
 import org.firstinspires.ftc.teamcode.Software.Subsystems.TelemetryManager;
 import org.firstinspires.ftc.teamcode.Software.Variables;
@@ -18,15 +17,14 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 @TeleOp
 public class TeleOpMain extends OpMode {
 
-    RobotHardware rob = new RobotHardware();
-    TelemetryManager tel = new TelemetryManager();
-    Drivetrain drivetrain = new Drivetrain(rob, tel);
-    IMUSensor gyro = new IMUSensor();
-    IntakeController intake = new IntakeController();
-    SorterController sorter = new SorterController();
-    FlywheelController launcher = new FlywheelController();
-    Sorter_Automation cycler = new Sorter_Automation();
-    Variables variables = new Variables();
+    Variables var = new Variables();
+    RobotHardware rob = new RobotHardware(hardwareMap);
+    TelemetryManager tel = new TelemetryManager(telemetry);
+    Drivetrain drivetrain = new Drivetrain(rob, tel, var);
+    IntakeController intake = new IntakeController(rob, tel, var);
+    SorterController sorter = new SorterController(rob, tel, var);
+    FlywheelController launcher = new FlywheelController(rob, tel, var);
+    IMUSensor gyro = new IMUSensor(rob);
     double heading;
     double motorSpeed = 0.8;
     boolean manualSorter = true;
@@ -38,13 +36,6 @@ public class TeleOpMain extends OpMode {
 
     @Override
     public void init() {
-        rob.init(hardwareMap);
-        tel.init(telemetry);
-        gyro.init(rob);
-        intake.init(rob, tel);
-        sorter.init(rob, tel);
-        launcher.init(rob, tel);
-        cycler.init(rob, tel);          // now valid
     }
 
     @Override
@@ -62,11 +53,11 @@ public class TeleOpMain extends OpMode {
 
         // CONTROLS INTAKE
         intake.toggleIntake(gamepad2.startWasPressed());
-        intake.controlIntake(gamepad2, variables);
+        intake.controlIntake(gamepad2);
 
         // CONTROLS DRIVETRAIN
         drivetrain.changeMovement(gamepad1.leftBumperWasPressed());
-        drivetrain.controlRobot(gamepad1, variables, heading);
+        drivetrain.controlRobot(gamepad1, heading);
         drivetrain.resetIMU(gamepad1.a, gyro);
 
         // CONTROLS SORTER)

@@ -16,7 +16,7 @@ public class RobotHardware {
     public Servo rgbLight, leftLaunchServo, rightLaunchServo, middleLaunchServoLeft, middleLaunchServoRight, hood;
 
 
-    public void init(HardwareMap hwMap) {
+    public RobotHardware(HardwareMap hwMap) {
         // Motor Names and Variables (drivetrain)
         leftFront = hwMap.get(DcMotor.class, "leftFront");
         rightFront = hwMap.get(DcMotor.class, "rightFront");

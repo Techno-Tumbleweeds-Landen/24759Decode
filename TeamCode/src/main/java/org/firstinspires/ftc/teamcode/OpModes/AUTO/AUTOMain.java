@@ -3,39 +3,31 @@ package org.firstinspires.ftc.teamcode.OpModes.AUTO;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
 import org.firstinspires.ftc.teamcode.Hardware.RobotHardware;
 import org.firstinspires.ftc.teamcode.Hardware.Subsystems.Drivetrain;
 import org.firstinspires.ftc.teamcode.Hardware.Subsystems.FlywheelController;
 import org.firstinspires.ftc.teamcode.Hardware.Subsystems.IntakeController;
 import org.firstinspires.ftc.teamcode.Hardware.Subsystems.SorterController;
-import org.firstinspires.ftc.teamcode.Software.Subsystems.Sorter_Automation;
 import org.firstinspires.ftc.teamcode.Software.Subsystems.IMUSensor;
 import org.firstinspires.ftc.teamcode.Software.Subsystems.TelemetryManager;
 
 
-import org.firstinspires.ftc.teamcode.Hardware.RobotHardware;
-import org.firstinspires.ftc.teamcode.Hardware.Subsystems.Drivetrain;
+import org.firstinspires.ftc.teamcode.Software.Variables;
 
 @Autonomous
 public class AUTOMain extends LinearOpMode {
-    RobotHardware rob = new RobotHardware();
-    TelemetryManager tel = new TelemetryManager();
-    Drivetrain drivetrain = new Drivetrain(rob, tel);
-
+    Variables var = new Variables();
+    RobotHardware rob = new RobotHardware(hardwareMap);
+    TelemetryManager tel = new TelemetryManager(telemetry);
+    Drivetrain drivetrain = new Drivetrain(rob, tel, var);
+    IntakeController intake = new IntakeController(rob, tel, var);
+    FlywheelController launcher = new FlywheelController(rob, tel, var);
+    SorterController sorter = new SorterController(rob, tel, var);
+    IMUSensor gyro = new IMUSensor(rob);
     @Override
     public void runOpMode() {
-        rob.init(hardwareMap);
 
-        IMUSensor gyro = new IMUSensor();
-
-        RobotHardware rob = new RobotHardware();   // only once
-
-        IntakeController intake = new IntakeController();
-        SorterController sorter = new SorterController();
-        FlywheelController launcher = new FlywheelController();
-        Sorter_Automation cycler = new Sorter_Automation();
         double heading;
         boolean fieldMovement = false;
 

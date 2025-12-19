@@ -11,7 +11,7 @@ import org.firstinspires.ftc.teamcode.Hardware.RobotHardware;
 public class IMUSensor {
     private RobotHardware rob;
 
-    public void init(RobotHardware passedRob) {
+    public IMUSensor(RobotHardware passedRob) {
         this.rob = passedRob;
 
         RevHubOrientationOnRobot RevOrientation = new RevHubOrientationOnRobot(

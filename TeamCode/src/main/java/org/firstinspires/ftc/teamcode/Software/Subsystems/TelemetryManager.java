@@ -15,11 +15,9 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
  *     this.tel = passedTel;
  * }
  */
-
 public class TelemetryManager {
     private Telemetry telemetry;
-
-    public void init(Telemetry telemetry) {
+    public TelemetryManager(Telemetry telemetry) {
         this.telemetry = telemetry;
     }
 

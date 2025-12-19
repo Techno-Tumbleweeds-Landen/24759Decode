@@ -12,6 +12,7 @@ public class Drivetrain {
     Operators ope = new Operators();
     private TelemetryManager tel;
     private RobotHardware rob;
+    private Variables var;
     double tangent, normal, rotate;
     double leftStickY, leftStickX, rightStickY, rightStickX;
     double rfPow, rbPow, lbPow, lfPow;
@@ -32,19 +33,20 @@ public class Drivetrain {
      * @param passedRob RobotHardware object to be used in the class
      * @param passedTel TelemetryManager object to be used in the class
      */
-    public Drivetrain(RobotHardware passedRob, TelemetryManager passedTel) {
+    public Drivetrain(RobotHardware passedRob, TelemetryManager passedTel, Variables passedVar) {
         this.rob = passedRob;
         this.tel = passedTel;
+        this.var = passedVar;
     }
 
-    public void controlRobot(Gamepad gamepad, Variables variables, double heading) {
+    public void controlRobot(Gamepad gamepad, double heading) {
         tel.log("FieldMovement", fieldMovement);
         if (fieldMovement) {
             tel.log("Called fieldDrive", "no");
-            fieldDrive(gamepad, heading, variables.MEDSPEED);
+            fieldDrive(gamepad, heading, var.MEDSPEED);
         } else {
             tel.log("Called robotDrive", "yes");
-            robotDrive(gamepad, variables.MEDSPEED);
+            robotDrive(gamepad, var.MEDSPEED);
         }
     }
     public void resetIMU(Boolean reset, IMUSensor gyro) {
