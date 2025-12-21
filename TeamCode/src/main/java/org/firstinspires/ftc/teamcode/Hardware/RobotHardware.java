@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.IMU;
 import com.qualcomm.robotcore.hardware.DigitalChannel;
+import com.qualcomm.robotcore.hardware.NormalizedColorSensor;
 import com.qualcomm.robotcore.hardware.Servo;   // add this import
 
 
@@ -17,6 +18,8 @@ public class RobotHardware {
     public Servo rgbLight, leftLaunchServo, rightLaunchServo, middleLaunchServoLeft, middleLaunchServoRight, hood;
 
     public Limelight3A limelight;
+
+    public     NormalizedColorSensor colorSensor;
 
     public RobotHardware(HardwareMap hwMap) {
         // Motor Names and Variables (drivetrain)
@@ -34,6 +37,9 @@ public class RobotHardware {
         middleLaunchServoLeft = hwMap.get(Servo.class, "middleLeftLaunch"); // port 2
         middleLaunchServoRight = hwMap.get(Servo.class, "middleRightLaunch"); // port 3
         hood = hwMap.get(Servo.class, "hood"); // port 4
+
+        colorSensor = hwMap.get(NormalizedColorSensor.class, "colorSensor"); //I2C Port 1
+
 
         // Drivetrain Motor Directions
         leftFront.setDirection(DcMotor.Direction.REVERSE);
