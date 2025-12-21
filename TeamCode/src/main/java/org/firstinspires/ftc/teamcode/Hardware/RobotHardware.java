@@ -68,8 +68,7 @@ public class RobotHardware {
         imu = hwMap.get(IMU.class, "imu");
 
         // limelight
-        limelight = hwMap.get(Limelight3A.class, "limeLight");
-        limelight.pipelineSwitch(1);
+        limelight = hwMap.get(Limelight3A.class, "limelight");
         rgbLight = hwMap.get(Servo.class, "light1");
     }
 }
