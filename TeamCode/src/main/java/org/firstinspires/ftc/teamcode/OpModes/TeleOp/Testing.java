@@ -31,7 +31,8 @@ public class Testing extends OpMode {
         );
         imu.initialize(new IMU.Parameters(RevOrientation));
         limelight = hardwareMap.get(Limelight3A.class, "limelight");
-        limelight.pipelineSwitch(2);
+        limelight.pipelineSwitch(0);
+        limelight.start();
     }
 
     @Override

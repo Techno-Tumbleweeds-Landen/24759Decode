@@ -14,7 +14,6 @@ public class RobotHardware {
     public DcMotor leftFront, rightFront, leftBack, rightBack;
     public DcMotor flywheelMotor, intakeMotor, launchRotateMotor;
     public IMU imu;
-    public DigitalChannel magneticSwitch;   // Magnetic Limit Switch
     public Servo rgbLight, leftLaunchServo, rightLaunchServo, middleLaunchServoLeft, middleLaunchServoRight, hood;
 
     public Limelight3A limelight;
@@ -67,14 +66,13 @@ public class RobotHardware {
         launchRotateMotor.setDirection(DcMotor.Direction.REVERSE);
         launchRotateMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        // NON-ACTUATOR COMPONENTS
-        magneticSwitch = hwMap.get(DigitalChannel.class, "magneticSwitch");
-        magneticSwitch.setMode(DigitalChannel.Mode.INPUT);
         // IMU sensor
         imu = hwMap.get(IMU.class, "imu");
 
         // limelight
         limelight = hwMap.get(Limelight3A.class, "limelight");
+
+
         rgbLight = hwMap.get(Servo.class, "light1");
     }
 }
