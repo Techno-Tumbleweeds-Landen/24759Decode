@@ -64,7 +64,7 @@ public class TeleOpMain extends OpMode {
         drivetrain.controlRobot(gamepad1, heading);
         drivetrain.resetIMU(gamepad1.a, gyro);
 
-        // CONTROLS SORTER)
+        // CONTROLS SORTER
 
         // TELEMETRY
         telemetry.addData("", "");
