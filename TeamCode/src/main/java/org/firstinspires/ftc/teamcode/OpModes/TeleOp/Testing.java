@@ -3,21 +3,12 @@ package org.firstinspires.ftc.teamcode.OpModes.TeleOp;
 import com.qualcomm.hardware.limelightvision.LLResult;
 import com.qualcomm.hardware.limelightvision.Limelight3A;
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.IMU;
 
 import org.firstinspires.ftc.robotcore.external.navigation.Pose3D;
-import org.firstinspires.ftc.teamcode.Hardware.RobotHardware;
-import org.firstinspires.ftc.teamcode.Software.Subsystems.Limelight;
-import org.firstinspires.ftc.teamcode.Software.Subsystems.TelemetryManager;
-import org.firstinspires.ftc.teamcode.Software.Variables;
-import com.qualcomm.hardware.limelightvision.LLResult;
-
-import org.firstinspires.ftc.teamcode.Hardware.RobotHardware;
-import org.firstinspires.ftc.teamcode.Software.Variables;
 
 @TeleOp
 public class Testing extends OpMode {
