@@ -27,7 +27,6 @@ public class LauncherController {
     }
 
     public void toggleFlywheel(Boolean toggle) {
-        tel.log("Launcher Active", isActive);
         if (toggle) {
             isActive = !isActive;
         }
@@ -37,8 +36,23 @@ public class LauncherController {
         // Convert stick from [-1, 1] to [0, 1]
         double input = (-gamepad.left_stick_y + 1.0) / 2.0;
 
-        // Clamp for safety
-        input = Math.max(0.0, Math.min(input, var.HOOD_UP));
+        // Clamp
+        //input = Math.max(0.0, Math.min(input, var.HOOD_UP));
+
+        // Map [0,1] → [0.38,1.0]
+        double servoPos = var.HOOD_DOWN + (var.HOOD_UP - var.HOOD_DOWN) * input;
+
+        rob.hood.setPosition(servoPos);
+    }
+
+    /**
+     * @param position position from 0 to 1
+     */
+    public void controlHood(double position) {
+        double input = position;
+
+        // Clamp
+        input = Math.max(0.0, Math.min(input, 1));
 
         // Map [0,1] → [0.38,1.0]
         double servoPos = var.HOOD_DOWN + (var.HOOD_UP - var.HOOD_DOWN) * input;
@@ -46,15 +60,22 @@ public class LauncherController {
         rob.hood.setPosition(servoPos);
 
         tel.log("input", input);
-        tel.log("servoPos", servoPos);
+        tel.log("pos", servoPos);
     }
 
 
-    public void controlLaunchRotate(Gamepad gamepad) {
-        rob.launchRotateMotor.setPower(gamepad.left_stick_x);
-    }
-
-    public void setPower(double power){
-        rob.flywheelMotor.setPower(power);
+    public void controlLaunchRotate(Gamepad gamepad, double tx) {
+        if (gamepad.x) {
+            if (Math.abs(rob.launchRotateMotor.getCurrentPosition()) > 300) {
+                rob.launchRotateMotor.setPower(0);
+            } else {
+                // PID
+                tx = (Math.abs(tx) > 1) ? tx : 0;
+                double power = Math.pow(tx, 2);
+                rob.launchRotateMotor.setPower(tx / 50);
+            }
+        } else {
+            rob.launchRotateMotor.setPower(gamepad.left_stick_x);
+        }
     }
 }

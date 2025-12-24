@@ -17,12 +17,14 @@ public class Limelight{
         this.var = passedVar;
     }
 
-    public void changePipeline(int pipelineNum) {
+
+    public void start(int pipelineNum){
         rob.limelight.pipelineSwitch(pipelineNum);
+        rob.limelight.start();
     }
 
+
     public LLResult  getInfo() {
-        tel.log("info", rob.limelight.getLatestResult());
         return rob.limelight.getLatestResult();
     }
 

@@ -12,6 +12,8 @@ public class Variables {
     //SERVO POSITIONS
     public final double LEFT_SERVO_DOWN = 0.33;
     public final double LEFT_SERVO_UP = 0.63;
+    public final double RIGHT_SERVO_DOWN = 0.73;
+    public final double RIGHT_SERVO_UP = 0.43;
     public final double HOOD_DOWN = 0.38;
     public final double HOOD_UP = 1;
 
