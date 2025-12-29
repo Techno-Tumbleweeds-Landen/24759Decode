@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.OpModes.TeleOp;
 
+import com.qualcomm.hardware.limelightvision.LLResult;
 import com.qualcomm.hardware.limelightvision.Limelight3A;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -24,6 +25,7 @@ public class TeleOpMain extends OpMode {
     IntakeController intake;
     FlickerController flickers;
     LauncherController launcher;
+    LLResult llInfo;
     IMUSensor gyro;
     Limelight limelight;
     double heading, tx, ty;
@@ -68,8 +70,8 @@ public class TeleOpMain extends OpMode {
         heading = gyro.getHeading();
 
         // LIMELIGHT
-        tx = limelight.getInfo().getTx();
-        ty = limelight.getInfo().getTy();
+        llInfo = limelight.getInfo();
+
 
         // CONTROLS SORTER
         flickers.controlFlickers(gamepad2);
@@ -81,7 +83,8 @@ public class TeleOpMain extends OpMode {
         // hood control
         launcher.controlHood(hoodPos);
         // rotator control
-        launcher.controlLaunchRotate(gamepad2, tx);
+        launcher.toggleFocus(gamepad2.dpadDownWasPressed());
+        launcher.controlLaunchRotate(gamepad2, limelight.getInfo());
 
         // CONTROLS INTAKE
         intake.toggleIntake(gamepad2.startWasPressed());
@@ -95,11 +98,12 @@ public class TeleOpMain extends OpMode {
         // CONTROLS SORTER
 
         // TELEMETRY
-        telemetry.addData("Launcher Speed", launcherSpeed);
+        telemetry.addData("\nLauncher Speed", launcherSpeed);
         telemetry.addData("Hood Position", hoodPos);
-        telemetry.addData("IMU Position", heading * 180);
-        telemetry.addData("TX", tx);
-        telemetry.addData("TY", ty);
+
+        telemetry.addData("\nCamera: \nTy", llInfo.getTy());
+        telemetry.addData("Tx", llInfo.getTx());
+        telemetry.addData("Ta", llInfo.getTa());
         telemetry.update();
     }
 }

@@ -40,7 +40,7 @@ public class Drivetrain {
     }
 
     public void controlRobot(Gamepad gamepad, double heading) {
-        tel.log("FieldMovement", fieldMovement);
+        tel.log("\nFieldMovement", fieldMovement);
         if (fieldMovement) {
             fieldDrive(gamepad, heading, var.MEDSPEED);
         } else {
@@ -76,7 +76,6 @@ public class Drivetrain {
         lbPow = tangent - normal - rotate;
         lfPow = tangent + normal - rotate;
 
-        tel.log("rfPow PRE CLAMP", rfPow);
         // 🧼 Clamp motor powers
         rfPow = ope.clamp(rfPow, -1, 1);
         rbPow = ope.clamp(rbPow, -1, 1);
