@@ -21,11 +21,19 @@ public class FlickerController {
 
     public void controlFlickers(Gamepad gamepad) {
         if (gamepad.b) {
-            rob.rightLaunchServo.setPosition(var.LEFT_SERVO_UP);
+            rob.backRightLaunch.setPosition(0.2);
         } else if (gamepad.start) {
-            rob.rightLaunchServo.setPosition(gamepad.right_stick_x);
+            rob.backRightLaunch.setPosition(gamepad.right_stick_x);
         } else {
-            rob.rightLaunchServo.setPosition(var.LEFT_SERVO_DOWN);
+            rob.backRightLaunch.setPosition(1);
+
+            if (gamepad.b) {
+                rob.backLeftLaunch.setPosition(0.2);
+            } else if (gamepad.start) {
+                rob.backLeftLaunch.setPosition(gamepad.right_stick_x);
+            } else {
+                rob.backLeftLaunch.setPosition(0);
+            }
         }
     }
 

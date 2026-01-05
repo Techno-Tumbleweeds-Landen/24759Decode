@@ -15,7 +15,7 @@ public class RobotHardware {
     public DcMotor flywheelMotor, intakeMotor, launchRotateMotor;
     public IMU imu;
     public DigitalChannel magneticSwitch;   // Magnetic Limit Switch
-    public Servo rgbLight, leftLaunchServo, rightLaunchServo, middleLaunchServoLeft, middleLaunchServoRight, hood;
+    public Servo rgbLight, frontRightLaunch, frontLeftLaunch, backRightLaunch, backLeftLaunch, hood;
 
     public Limelight3A limelight;
 
@@ -32,13 +32,13 @@ public class RobotHardware {
         intakeMotor = hwMap.get(DcMotor.class, "intakeMotor");
         launchRotateMotor = hwMap.get(DcMotor.class, "launchRotator");
         // Servo Names and Variables
-        leftLaunchServo = hwMap.get(Servo.class, "leftLaunch"); // port 0
-        rightLaunchServo = hwMap.get(Servo.class, "rightLaunch"); // port 1
-        middleLaunchServoLeft = hwMap.get(Servo.class, "middleLeftLaunch"); // port 2
-        middleLaunchServoRight = hwMap.get(Servo.class, "middleRightLaunch"); // port 3
+        backLeftLaunch = hwMap.get(Servo.class, "backLeftLaunch"); // port 0
+        backRightLaunch = hwMap.get(Servo.class, "backRightLaunch"); // port 1
+        frontLeftLaunch = hwMap.get(Servo.class, "frontLeftLaunch"); // port 2
+        frontRightLaunch = hwMap.get(Servo.class, "frontRightLaunch"); // port 3
         hood = hwMap.get(Servo.class, "hood"); // port 4
 
-        colorSensor = hwMap.get(NormalizedColorSensor.class, "colorSensor"); //I2C Port 1
+        //colorSensor = hwMap.get(NormalizedColorSensor.class, "colorSensor"); //I2C Port 1
 
 
         // Drivetrain Motor Directions
@@ -68,13 +68,13 @@ public class RobotHardware {
         launchRotateMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         // NON-ACTUATOR COMPONENTS
-        magneticSwitch = hwMap.get(DigitalChannel.class, "magneticSwitch");
-        magneticSwitch.setMode(DigitalChannel.Mode.INPUT);
+        //magneticSwitch = hwMap.get(DigitalChannel.class, "magneticSwitch");
+        //magneticSwitch.setMode(DigitalChannel.Mode.INPUT);
         // IMU sensor
         imu = hwMap.get(IMU.class, "imu");
 
         // limelight
         limelight = hwMap.get(Limelight3A.class, "limelight");
-        rgbLight = hwMap.get(Servo.class, "light1");
+       // rgbLight = hwMap.get(Servo.class, "light1");
     }
 }
